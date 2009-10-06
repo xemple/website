@@ -17,6 +17,7 @@ urlpatterns = patterns('',
 	(r'^client/', include('apps.client.urls')),
 	# temporary
 	(r'^offers/', include('apps.billing.urls')),
+	(r'^offer/', include('apps.billing.urls')),
 	# /temporary
 	(r'^billing/', include('apps.billing.urls')),
 	(r'^admin/(.*)', admin.site.root),
