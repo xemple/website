@@ -1,15 +1,15 @@
 from django.contrib import admin
-from apps.domain.models import DomainContact, Dns
+from apps.domain.models import DnsZone, DnsDomain
 
 
-class DomainContactAdmin(admin.ModelAdmin):
+class DnsZoneAdmin(admin.ModelAdmin):
 	pass
 
 
-class DnsAdmin(admin.ModelAdmin):
+class DnsDomainAdmin(admin.ModelAdmin):
 	pass
 	
 	
-admin.site.register(DomainContact, DomainContactAdmin)
-admin.site.register(Dns, DnsAdmin)
+admin.site.register(DomainZone, DnsZoneAdmin)
+admin.site.register(DnsDomain, DnsDomainAdmin)
 

@@ -10,23 +10,23 @@ from django.contrib.auth.decorators import login_required
 from django.contrib.auth import authenticate, login
 from django.contrib.auth.models import User
 from django.shortcuts import render_to_response
-from apps.client.models import Client, Contact
-from apps.client.forms import ClientForm, NewClientForm
+from apps.client.forms import NewClientForm
+from apps.client.models import ClientProfile
 
 
-@transaction.commit_on_success
+
 def client_new(request):
-	model_instance = Client()
+	model_instance = ClientProfile()
 	if request.POST:
-		form = NewClientForm(data=request.POST, instance=model_instance)
+		form = NewClientForm(request.POST)
 		if form.is_valid():
-			client, username, password  = form.save()
+			username, password = form.save()
 			user = authenticate(username=username, password=password)
 			if user is not None:
 				if user.is_active:
 					login(request, user)
-					return HttpResponseRedirect(reverse('select_offer'))
-			return HttpResponseRedirect(reverse('select_offer'))
+					return HttpResponseRedirect(reverse('manager_dashboard'))
+			return HttpResponseRedirect(reverse('client_new'))
 	else:
-		form = NewClientForm(instance=model_instance)
+		form = NewClientForm()
 	return render_to_response('client/client_form.html', {'form':form}, context_instance=RequestContext(request))

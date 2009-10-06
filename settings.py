@@ -50,7 +50,6 @@ MIDDLEWARE_CLASSES = (
 	'django.middleware.doc.XViewMiddleware',
 	'django.contrib.flatpages.middleware.FlatpageFallbackMiddleware',
 	'debug_toolbar.middleware.DebugToolbarMiddleware',
-	'apps.cart.middleware.CartMiddleware'
 )
 
 AUTHENTICATION_BACKENDS = (
@@ -72,19 +71,17 @@ INSTALLED_APPS = (
 	'django.contrib.humanize',
 	'django.contrib.flatpages',
 	'debug_toolbar',
-	'south',
-	'apps.publicweb',
+	'apps.front',
 	'apps.manager',
 	'apps.client',
-	'apps.billing',
-	'apps.cart',
+	'apps.resources',
 	'apps.service',
-	'apps.mail',
-	'apps.ftp',
-	'apps.domain',
-	'apps.database',
-	'apps.logging',
+	'apps.billing',
+
 )
+
+
+AUTH_PROFILE_MODULE = "client.ClientProfile"
 
 SESSION_EXPIRE_AT_BROWSER_CLOSE = True
 APPEND_SLASH = True

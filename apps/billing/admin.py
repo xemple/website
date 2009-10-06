@@ -1,25 +1,30 @@
 from django.contrib import admin
-from apps.billing.models import Offer, Subscription, Quote, QuoteItem
+from django.contrib.auth.models import User
+from apps.billing.models import Offer, Subscription, Invoice, InvoiceItem, Transaction
+
 
 
 class OfferAdmin(admin.ModelAdmin):
-	list_display = ('name', 'price')
+	pass
+admin.site.register(Offer, OfferAdmin)
 
 
 class SubscriptionAdmin(admin.ModelAdmin):
-	list_display = ('service', 'smart_time_left')
-
-
-class QuoteAdmin(admin.ModelAdmin):
 	pass
-
-
-class QuoteItemAdmin(admin.ModelAdmin):
-	pass
-	
-	
-
-admin.site.register(Offer, OfferAdmin)
 admin.site.register(Subscription, SubscriptionAdmin)
-admin.site.register(Quote, QuoteAdmin)
-admin.site.register(QuoteItem, QuoteItemAdmin)
+
+
+class InvoiceAdmin(admin.ModelAdmin):
+	pass
+admin.site.register(Invoice, InvoiceAdmin)
+
+
+class InvoiceItemAdmin(admin.ModelAdmin):
+	pass
+admin.site.register(InvoiceItem, InvoiceItemAdmin)
+
+
+class TransactionAdmin(admin.ModelAdmin):
+	pass
+admin.site.register(Transaction, TransactionAdmin)
+

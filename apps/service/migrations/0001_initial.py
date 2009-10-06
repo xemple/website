@@ -1,9 +1,9 @@
 # -*- coding: utf-8 -*-
-
+ 
 from south.db import db
 from django.db import models
 from apps.service.models import *
-
+ 
 class Migration:
     
     def forwards(self, orm):

@@ -12,23 +12,14 @@ admin.autodiscover()
 
 
 urlpatterns = patterns('',
-	(r'^', include('apps.publicweb.urls')),
+	(r'^', include('apps.front.urls')),
 	(r'^manager/', include('apps.manager.urls')),
 	(r'^client/', include('apps.client.urls')),
-	(r'^billing/', include('apps.billing.urls')),
-	(r'^cart/', include('apps.cart.urls')),
 	(r'^admin/(.*)', admin.site.root),
+	
 )
 
 
-
-
-
-urlpatterns += patterns('apps.testservers.test',
-    
-	url(r'^test/$','test', name='test'),
-
-)
 
 
 
