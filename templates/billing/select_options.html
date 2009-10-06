@@ -1,0 +1,10 @@
+
+{% for o in offers %}
+{{ o.name }}
+<form method="post" action="{% url cart_add_item o.id|urlencode %}">
+    <input type="hidden" name="back" value="/billing/domain_choice" />
+    <p><input type="text" name="quantity" value="0"/> {{ o.price }} Euros</p>
+    <p><input type="submit" value="Choose this option" /></p>
+</form>
+{% endfor %}
+</form>

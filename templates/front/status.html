@@ -1,0 +1,91 @@
+{% extends "front/front.html" %}
+
+
+
+
+{% block main_content %}
+<div class="title cblack">
+<img src="{{ MEDIA_URL }}/front/img/title_etatdureseau.png"><br>
+
+Discover our <b>future features</b> and be the first one to test them !<br><br>
+</div>
+
+
+<div id="status_container" class="cgrey">
+	
+	Ut labore et dolore magna aliqua. Ut enim ad minim veniam, quis nostrud exercitation ullamco laboris nisi ut aliquip ex ea 
+	commodo consequat. Duis aute irure dolor in reprehenderit in voluptate velit esse <br><br>
+	
+	
+	<div id="status_top">
+		<div class="bluetitle clightblue">Current incidents / maintenances</div>
+		
+		There is no current incident / maintenance. All Xemple services are online.
+		
+	</div>
+	
+	<div id="status_left">
+		<div class="bluetitle clightblue">Scheduled maintenances</div>
+		
+		
+		<div class="status_item_info clightgrey">At <b>15:30</b> &nbsp;&nbsp;&nbsp; Duration : <b>30 min</b></div>
+		<div class="status_item_date">28/05/09</div>
+		<div class="status_item_title">Cluster 3.0 Update</div>
+		<div class="status_item_descr clear">
+			Lorem ipsum dolor sit amet, consectetur adipisicing elit, sed do eiusmod tempor incididunt ut.
+		</div>
+		<div class="status_item_separator_left"></div>
+		
+		<div class="status_item_info clightgrey">At <b>09:30</b> &nbsp;&nbsp;&nbsp; Duration : <b>1h30</b></div>
+		<div class="status_item_date">12/05/09</div>
+		<div class="status_item_title">Service restoration</div>
+		<div class="status_item_descr clear">
+			Exercitation ullamco laboris nisi ut aliquip ex ea commodo consequat. Duis aute irure dolor in reprehenderit in voluptate velit esse cillum 
+			dolore eu fugiat nulla pariatur. Excepteur sint occaecat cupidatat non proident, sunt in culpa qui officia deserunt mollit anim id est laborum.
+		</div>
+				
+				
+	</div>
+	
+	<div id="status_right">
+		<div class="bluetitle clightblue">Recently resolved incidents</div>
+		
+		<div class="status_item_info clightgrey">Level of severity : <span class="red"><b>HIGH</b></span></div>
+		<div class="status_item_date">03/12/08</div>
+		<div class="status_item_title">Service latency</div>
+		<div class="status_item_descr clear">
+			At this time, all affected services have returned to normal.
+		</div>
+		<div class="status_item_separator_right"></div>
+		
+		<div class="status_item_info clightgrey">Level of severity : <span class="green"><b>LOW</b></span></div>
+		<div class="status_item_date">03/12/08</div>
+		<div class="status_item_title">Packet losses</div>
+		<div class="status_item_descr clear">
+			Issue of packet losses between client and the server is fully resolved.
+		</div>
+		<div class="status_item_separator_right"></div>		
+
+		<div class="status_item_info clightgrey">Level of severity : <span class="yellow"><b>MEDIUM</b></span></div>
+		<div class="status_item_date">01/12/08</div>
+		<div class="status_item_title">Couldn't reach the host server</div>
+		<div class="status_item_descr clear">
+			Everything is back.
+		</div>
+		<div class="status_item_separator_right"></div>
+		
+		<div class="status_item_info clightgrey">Level of severity : <span class="yellow"><b>MEDIUM</b></span></div>
+		<div class="status_item_date">30/11/08</div>
+		<div class="status_item_title">Billing and account issues</div>
+		<div class="status_item_descr clear">
+			You are now able to use, manage your account and pay your bills online.
+		</div>
+
+				
+		
+	</div>
+			
+</div>
+
+<div class="clear" style="height: 20px;"></div>
+{% endblock %}

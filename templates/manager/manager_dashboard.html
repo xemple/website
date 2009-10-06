@@ -1,0 +1,20 @@
+lol {{ user.username }} 
+<br />
+<br />
+<br />
+<br />
+{% if cube_list %}
+%%% Your CUBES³ %%%
+<br /><br />
+{% endif %}
+<br />
+{% for c in cube_list %}
+Name : {{c.name}}<br />
+Size : {{c.parts}}³<br />
+Status : {{c.enabled}}<br />
+Ram : {{c.ram}}<br />
+Disk Space {{c.disk_space}}<br />
+IP : {{c.ip_address}}<br />
+<br />
+<br />
+{% endfor %}

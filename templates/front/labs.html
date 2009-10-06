@@ -1,0 +1,69 @@
+{% extends "front/front.html" %}
+
+
+{% block main_content %}
+
+<div class="title cblack">
+<img src="{{ MEDIA_URL }}/front/img/title_labs.png"><br>
+
+Discover our <b>future features</b> and be the first one to test them !<br><br>
+</div>
+
+<div class="labs_feature">
+	<div class="labs_feature_icon"><img src="{{ MEDIA_URL }}/front/img/labs_icon_django.jpg" /></div>
+	<div class="labs_feature_info cgrey">
+		<div class="labs_feature_title cblack">Conteneurs Django</div>
+		J'aime bien les peutates Lorem ipsum dolor fugiat nulla pariatur sit amet, consectetur adipisicing elit, sed do eiusmod fugiat nulla pariatur tempor incididunt ut labore !
+		</div>
+	<div class="labs_feature_status labs_feature_status_standard">
+		<div class="labs_feature_status1 cblack">Statut</div>
+		<div class="labs_feature_status2 cgrey">EN DEPLOIEMENT</div>
+		<div class="labs_feature_progressbar labs_feature_progressbar_green"><img src="{{ MEDIA_URL }}/front/img/labs_progressbar_grey.jpg" width="0" height="3"></div>
+		<div class="labs_feature_status3 clightgrey">DISPONIBLE</div>		
+	</div>
+</div>
+
+<div class="labs_feature">
+	<div class="labs_feature_icon"><img src="{{ MEDIA_URL }}/front/img/labs_icon_xserve.jpg" /></div>
+	<div class="labs_feature_info cgrey">
+		<div class="labs_feature_title cblack">Virtualisation XServe</div>
+		in reprehenderit in voluptate velit esse cillum dolore eu fugiat nulla pariatur. Excepteur sint occaecat cupidatat non proident.
+		</div>
+	<div class="labs_feature_status labs_feature_status_standard">
+		<div class="labs_feature_status1 cblack">Statut</div>
+		<div class="labs_feature_status2 cgrey">EN DEVELOPPEMENT</div>
+		<div class="labs_feature_progressbar labs_feature_progressbar_green"><img src="{{ MEDIA_URL }}/front/img/labs_progressbar_grey.jpg" width="50" height="3"></div>
+		<div class="labs_feature_status3 clightgrey">DEBUT 2010</div>		
+	</div>
+</div>
+
+<div class="labs_feature">
+	<div class="labs_feature_icon"><img src="{{ MEDIA_URL }}/front/img/labs_icon_ror.jpg" /></div>
+	<div class="labs_feature_info cgrey">
+		<div class="labs_feature_title cblack">Conteneurs Ruby on Rails</div>
+		Ut enim ad minim veniam, quis nostrud exercitation ullamco laboris nisi ut aliquip ex ea commodo consequat. Duis aute irure dolor.
+		</div>
+	<div class="labs_feature_status labs_feature_status_beta">
+		<div class="labs_feature_status1 cblack">Statut</div>
+		<div class="labs_feature_status2 cgrey">EN DEVELOPPEMENT</div>
+		<div class="labs_feature_progressbar labs_feature_progressbar_yellow"><img src="{{ MEDIA_URL }}/front/img/labs_progressbar_grey.jpg" width="80" height="3"></div>
+		<div class="labs_feature_status3 clightgrey">ETE 2010</div>		
+	</div>
+</div>
+
+<div class="labs_feature">
+	<div class="labs_feature_icon"><img src="{{ MEDIA_URL }}/front/img/labs_icon_iphone.jpg" /></div>
+	<div class="labs_feature_info cgrey">
+		<div class="labs_feature_title cblack">iPhone control panel</div>
+		Quis nostrud exercitation ullamco peutates Lorem ipsum dolor laboris nisi ut sunt in culpa qui officia deserunt mollit anim id est laborum.
+		</div>
+	<div class="labs_feature_status labs_feature_status_available">
+		<div class="labs_feature_status1 cblack">Statut</div>	
+		<div class="labs_feature_status2 cgrey">DÉPLOYÉ</div>
+		<div class="labs_feature_progressbar"></div>		
+		<div class="labs_feature_status3 clightgrey">DISPONIBLE</div>		
+	</div>
+</div>
+
+<div class="clear" style="height: 20px;"1></div>
+{% endblock %}

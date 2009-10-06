@@ -1,0 +1,90 @@
+html, body, div, span, applet, object, iframe,
+h1, h2, h3, h4, h5, h6, p, blockquote, pre,
+a, abbr, acronym, address, big, cite, code,
+del, dfn, em, font, img, ins, kbd, q, s, samp,
+small, strike, strong, sub, sup, tt, var,
+b, u, i, center,
+dl, dt, dd, ol, ul, li,
+fieldset, form, label, legend,
+table, caption, tbody, tfoot, thead, tr, th, td {
+	margin: 0;
+	padding: 0;
+	border: 0;
+	outline: 0;
+	font-size: 100%;
+	vertical-align: baseline;
+	background: transparent;
+}
+
+
+
+body {
+	font-family: Arial, Helvetica, sans-serif;
+	background-color: #d8d8d8;
+}
+
+a {
+	text-decoration: none;
+	color: #2ba7c8;
+}
+
+a:hover {
+	color: #233d4b;
+}
+
+.bold {
+	font-weight:bold;
+}
+
+.fleft {
+	float: left;
+}
+
+.fright {
+	float: right;
+}
+
+.clear {
+	clear: both;
+}
+
+.center {
+	text-align: center;
+}
+
+.spacer {
+	display: inline;
+}
+
+.red {
+	color: #ff4d4d;
+}
+
+.yellow {
+	color: #f8c72f;
+}
+
+.green {
+	color: #a2c32f;
+}
+
+.clightgrey {
+	color:#919191;
+	font-size:12px;
+}
+
+.cgrey {
+	color: #4d4c4e;
+}
+
+.cblack {
+	color: #2c2f30;
+}
+
+.clightblue {
+	color: #00afdf;
+}
+
+.cdarkblue {
+	color: #376076;
+}

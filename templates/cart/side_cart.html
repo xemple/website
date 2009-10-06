@@ -1,0 +1,19 @@
+{% load i18n %}
+<div id="sidecart">
+    <h4><a href="{% url cart %}">Checkout</a></h4>
+    <form name="fupdate" method="post" action="{% url cart_update %}" />
+    <input type="hidden" name="back" value="{{ redirect_url }}">
+    <table>
+        {% for item in cart.items %}
+        <tr>
+            <td><a href="{% url cart_remove_item item.sku %}?back={{ redirect_url }}">-</a></td>
+            <td><a href="{% url cart_add_item item.sku %}?back={{ redirect_url }}">+</a></td>
+            <td><input type="text" name="count_{{ item.sku }}" value="{{ item.units }}" maxlength="3" size="4" /></td>
+            <td>{{ item.title }}</td>
+        </tr>
+        {% endfor %}
+    </table>
+    <p>Total Price: {{ cart.get_total_price }}</p>
+    <p><input type="submit" name="supdate" value="Update cart" />&nbsp;<input type="submit" name="do_empty" value="Empty cart" /></p>
+</form>
+</div>

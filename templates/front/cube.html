@@ -1,0 +1,75 @@
+{% extends "front/front.html" %}
+
+
+
+{% block main_content %}
+<div class="title cblack">
+<img src="{{ MEDIA_URL }}/front/img/title_cube.png">
+</div>
+
+
+<div id="offer_menu">
+	<a href="#"><img class="offer_menu_link" src="{{ MEDIA_URL }}/front/img/offermenu_general.jpg" data="general"></a>
+	<a href="#"><img class="offer_menu_link" src="{{ MEDIA_URL }}/front/img/offermenu_fonctionnalites.jpg" data="fonctionnalites"></a>
+	<a href="#"><img class="offer_menu_link" src="{{ MEDIA_URL }}/front/img/offermenu_administration.jpg" data="administration"></a>
+	<a href="#"><img class="offer_menu_link" src="{{ MEDIA_URL }}/front/img/offermenu_faq.jpg" data="faq"></a>
+</div>
+
+<script language="javascript">
+	$(".offer_menu_link").mouseover(function(){
+		$(this).attr('src', '{{ MEDIA_URL }}/front/img/offermenu_' + $(this).attr('data') + '_hover.jpg');
+	}).mouseout(function(){
+		$(this).attr('src', '{{ MEDIA_URL }}/front/img/offermenu_' + $(this).attr('data') + '.jpg');
+	});
+</script>
+
+<div id="offer_left">
+	<div id="offer_left_content" class="cgrey">
+		
+		<br/>
+		A cluster-based, modern hosting service powered by hundreds of servers working in tandem to power your websites, applications and email with unrivaled power, burstability and reliability.
+		<br/><br/>
+		
+		<div id="offer_overv1">
+			<b>Lorem ipsum dolor sit amet, consectetur</b><br/>
+			Pellentesque ipsum velit, cursus id, tristique nec, eleifend id, leo. Maecenas felis. Curabitur sollicitudin dui nec sapien. Lorem ipsum dolor sit amet.
+		</div>
+		
+		<div id="offer_overv2">
+			<b>Integer ligula tellus, faucibus nec</b><br/>
+			Nullam facilisis posuere lectus. Suspendisse vestibulum lacus ut arcu. Vestibulum porta. Mauris id metus nec nisl tincidunt varius.
+		</div>
+		
+		<div id="offer_overv3">
+			<b>Django add-on available.</b><br/>
+			Nullam facilisis posuere lectus. Suspendisse vestibulum lacus ut arcu. Vestibulum porta. Mauris id metus nec nisl tincidunt varius.
+		</div>
+	</div>
+</div>
+
+<div id="offer_right" class="cgrey">
+	<div class="offer_keywords_item">
+		<span class="keyword">flexible.</span><br/>
+		Multi-site hosting supports unique email addresses and sub-FTP users for every domain.
+	</div>
+	<div class="offer_keywords_item">
+		<span class="keyword">instantané.</span><br/>
+		Easy to use, optimized auto-installers for WordPress, Drupal, ZenCart & Magento.
+	</div>
+	<div class="offer_keywords_item">
+		<span class="keyword">simple.</span><br/>
+		Multi-site hosting supports unique email addresses and sub-FTP users for every domain.
+	</div>
+	<div class="offer_keywords_item">
+		<span class="keyword">innovant.</span><br/>
+		Virtual bolt-on dedicated containers available to power Rails, Django and MySQL apps.
+	</div>
+	<div class="offer_keywords_item">
+		<span class="keyword">abordable.</span><br/>
+		From the first byte served, your site is hosted on advanced clustered technology designed for high-traffic.
+	</div>
+	<a href="#"><img src="{{ MEDIA_URL }}/front/img/activation.jpg"></a>
+</div>
+
+<div class="clear" style="height: 20px;"1></div>
+{% endblock %}

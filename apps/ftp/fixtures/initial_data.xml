@@ -1,0 +1,68 @@
+<?xml version="1.0" encoding="utf-8"?>
+<django-objects version="1.0">
+	
+	<object pk="1" model="ftp.ftpuser">
+        <field type="ForeignKey" name="owner">2</field>
+        <field type="BooleanField" name="active">1</field>
+		<field type="CharField" name="login">ftplogin1</field>
+		<field type="CharField" name="password">sha1$a16aa$3887940e67c92108b70624c6fe2258e71d30b2f0</field>
+    </object>
+
+	<object pk="2" model="ftp.ftpuser">
+        <field type="ForeignKey" name="owner">3</field>
+        <field type="BooleanField" name="active">1</field>
+		<field type="CharField" name="login">ftplogin2</field>
+		<field type="CharField" name="password">sha1$a16aa$3887940e67c92108b70624c6fe2258e71d30b2f0</field>
+    </object>
+
+	<object pk="3" model="ftp.ftpuser">
+        <field type="ForeignKey" name="owner">4</field>
+        <field type="BooleanField" name="active">1</field>
+		<field type="CharField" name="login">ftplogin3</field>
+		<field type="CharField" name="password">sha1$a16aa$3887940e67c92108b70624c6fe2258e71d30b2f0</field>
+    </object>
+
+	<object pk="4" model="ftp.ftpuser">
+        <field type="ForeignKey" name="owner">5</field>
+        <field type="BooleanField" name="active">1</field>
+		<field type="CharField" name="login">ftplogin4</field>
+		<field type="CharField" name="password">sha1$a16aa$3887940e67c92108b70624c6fe2258e71d30b2f0</field>
+    </object>
+
+
+
+
+
+
+
+
+
+
+
+
+	<object pk="1" model="ftp.ftpdir">
+        <field type="ForeignKey" name="site">1</field>
+        <field type="CharField" name="path">/prout/lol/kikoo/</field>
+		<field type="ForeignKey" name="ftp">1</field>
+    </object>
+
+	<object pk="2" model="ftp.ftpdir">
+        <field type="ForeignKey" name="site">2</field>
+        <field type="CharField" name="path">/mdr/lol/caca/</field>
+		<field type="ForeignKey" name="ftp">1</field>
+    </object>
+
+	<object pk="3" model="ftp.ftpdir">
+        <field type="ForeignKey" name="site">3</field>
+        <field type="CharField" name="path">/zomg/mouahaha/lol/</field>
+		<field type="ForeignKey" name="ftp">1</field>
+    </object>
+
+	<object pk="4" model="ftp.ftpdir">
+        <field type="ForeignKey" name="site">4</field>
+        <field type="CharField" name="path">/caca/lol/boobs/</field>
+		<field type="ForeignKey" name="ftp">1</field>
+    </object>
+
+
+</django-objects>

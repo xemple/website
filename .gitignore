@@ -1,0 +1,7 @@
+*.pyc
+*.bak
+*.db
+*.DS_Store
+.hg*
+settings_local.py
+media/admin

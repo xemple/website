@@ -1,0 +1,212 @@
+{% extends "manager/manager.html" %}
+
+
+{% block main_content %}
+
+
+<div id="manager_left">
+
+	<div class="title cblack">
+		<img src="{{ MEDIA_URL }}/manager/img/title_panneaudecontrole.png"><br><br>		
+		The dashboard is a summary of all your Xemple services.<br><br>
+	</div>
+
+	<div class="dashboard_item">
+		<div class="dashboard_item_header">&nbsp;</div>
+		<div class="dashboard_item_content">
+
+			<div class="dashboard_item_topcontent">
+				<div class="dashboard_item_expand dashboard_item_1" data="1" style="display: none;"><img src="{{ MEDIA_URL }}/manager/img/icon_collapse.png"></div>
+				<div class="dashboard_item_expand dashboard_item_1" data="1"><img src="{{ MEDIA_URL }}/manager/img/icon_expand.png"></div>
+				<div class="dashboard_item_status"><img src="{{ MEDIA_URL }}/manager/img/status_online.png"></div>		
+				
+				<div class="dashboard_item_name cdarkblue"><b><span class="clightblue">X</span>CUBE</b> / XC-6823<br>La Castafiore</div>	
+				
+
+					<div class="dashboard_smallmeter_name cgrey dashboard_smallmeters_1">BW:</div>
+					<div class="dashboard_smallmeter dashboard_smallmeters_1">
+						<div class="dashboard_smallmeter_color dashboard_smallmeter_green" style="width: 40px;"></div>
+					</div>
+	
+					<div class="dashboard_smallmeter_name cgrey dashboard_smallmeters_1">HD:</div>
+					<div class="dashboard_smallmeter dashboard_smallmeters_1">
+						<div class="dashboard_smallmeter_color dashboard_smallmeter_red" style="width: 100px;"></div>
+					</div>
+
+			</div>
+			
+			
+			<div id="dashboard_bottomcontent_1" class="dashboard_item_bottomcontent" style="display: none;">
+			
+				<div class="dashboard_element cgrey">
+					<span class="dashboard_element_title cdarkblue">domain names</span><br><br>
+					- nglayer.com<br>
+					- nglayer.net<br>
+					- zombinazi.net<br>
+				</div>
+				
+				<div class="dashboard_element cgrey">
+					<span class="dashboard_element_title cdarkblue">bandwidth</span><br>
+					Monthly usage
+					
+					<div class="dashboard_bigmeter">
+						<div class="dashboard_bigmeter_color dashboard_bigmeter_green" style="width: 40px;"></div>
+					</div>
+	
+	
+					<div class="dashboard_bigmeter_data">740 <span class="dashboard_bigmeter_unit">Go</span></div>
+					<div class="dashboard_bigmeter_outof">/ 3300 Go</div>
+					
+					<div class="dashboard_element_more cgrey">SHOW DETAILS</div>					
+				</div>
+
+				<div class="dashboard_element cgrey">
+					<span class="dashboard_element_title cdarkblue">disk space</span><br>
+					Monthly usage
+					
+					<div class="dashboard_bigmeter">
+						<div class="dashboard_bigmeter_color dashboard_bigmeter_orange" style="width: 100px;"></div>
+					</div>
+	
+	
+					<div class="dashboard_bigmeter_data">1.2 <span class="dashboard_bigmeter_unit">Go</span></div>
+					<div class="dashboard_bigmeter_outof">/ 10 Go</div>
+					
+					<div class="dashboard_element_more cgrey">SHOW DETAILS</div>					
+				</div>	
+				
+				
+				<div class="dashboard_element dashboard_element_startstop cgrey">
+					<span class="dashboard_element_title cdarkblue">actions</span><br><br>
+					
+					START STOP ?
+				
+				</div>
+			
+			</div>
+			
+			
+		</div>
+		<div class="dashboard_item_footer">&nbsp;</div>
+	</div>
+
+	<div class="dashboard_item">
+		<div class="dashboard_item_header">&nbsp;</div>
+		<div class="dashboard_item_content">
+			
+			<div class="dashboard_item_topcontent">
+				<div class="dashboard_item_expand"><img src="{{ MEDIA_URL }}/manager/img/icon_expand.png"></div>
+				<div class="dashboard_item_status"><img src="{{ MEDIA_URL }}/manager/img/status_online.png"></div>		
+				
+				<div class="dashboard_item_name cdarkblue"><b><span class="clightblue">X</span>VPS</b> / XV-2541<br>Saturnin</div>	
+	
+				<div class="dashboard_smallmeter_name cgrey">BW:</div>
+				<div class="dashboard_smallmeter">
+					<div class="dashboard_smallmeter_color dashboard_smallmeter_green" style="width: 10px;"></div>
+				</div>
+	
+				<div class="dashboard_smallmeter_name cgrey">HD:</div>
+				<div class="dashboard_smallmeter">
+					<div class="dashboard_smallmeter_color dashboard_smallmeter_green" style="width: 14px;"></div>
+				</div>
+			</div>
+						
+		</div>
+		<div class="dashboard_item_footer">&nbsp;</div>
+	</div>
+	
+	<div class="dashboard_item">
+		<div class="dashboard_item_header">&nbsp;</div>
+		<div class="dashboard_item_content">
+					
+			<div class="dashboard_item_topcontent">
+				<div class="dashboard_item_expand"><img src="{{ MEDIA_URL }}/manager/img/icon_expand.png"></div>
+				<div class="dashboard_item_status"><img src="{{ MEDIA_URL }}/manager/img/status_suspended.png"></div>		
+				
+				<div class="dashboard_item_name cdarkblue"><b><span class="clightblue">X</span>DEDIE</b> / XD-14<br>Gros Quick</div>	
+	
+				<div class="dashboard_smallmeter_name cgrey">BW:</div>
+				<div class="dashboard_smallmeter">
+					<div class="dashboard_smallmeter_color dashboard_smallmeter_red" style="width: 110px;"></div>
+				</div>
+	
+				<div class="dashboard_smallmeter_name cgrey">HD:</div>
+				<div class="dashboard_smallmeter">
+					<div class="dashboard_smallmeter_color dashboard_smallmeter_red" style="width: 80px;"></div>
+				</div>
+			</div>
+						
+		</div>
+		<div class="dashboard_item_footer">&nbsp;</div>
+	</div>
+
+
+	<div class="dashboard_item">
+		<div class="dashboard_item_header">&nbsp;</div>
+		<div class="dashboard_item_content">
+			<div class="dashboard_item_topcontent">			
+				<div class="dashboard_item_expand"><img src="{{ MEDIA_URL }}/manager/img/icon_expand.png"></div>
+				<div class="dashboard_item_status"><img src="{{ MEDIA_URL }}/manager/img/status_online.png"></div>		
+				
+				<div class="dashboard_item_name cdarkblue"><b><span class="clightblue">X</span>DEDIE</b> / XD-15<br>Banania2</div>	
+	
+				<div class="dashboard_smallmeter_name cgrey">BW:</div>
+				<div class="dashboard_smallmeter">
+					<div class="dashboard_smallmeter_color dashboard_smallmeter_red" style="width: 102px;"></div>
+				</div>
+	
+				<div class="dashboard_smallmeter_name cgrey">HD:</div>
+				<div class="dashboard_smallmeter">
+					<div class="dashboard_smallmeter_color dashboard_smallmeter_green" style="width: 40px;"></div>
+				</div>
+			</div>
+						
+		</div>
+		<div class="dashboard_item_footer">&nbsp;</div>
+	</div>
+			
+</div>
+
+<script language="javascript">
+
+	$(".panel_item").mouseover(function(){
+		$(this).css('background-color', '#e4eaee');
+		$(this).css('border', '1px solid #a3becc');
+		
+	}).mouseout(function(){
+		$(this).css('background-color', '#f7f8f8');
+		$(this).css('border', '1px solid #f7f8f8');		
+	});
+
+	$(".dashboard_item_expand").click(function() { 
+	
+		var oid;
+		oid = $(this).attr('data');
+		
+		$(".dashboard_item_" + oid).toggle();
+		
+		if ($("#dashboard_bottomcontent_" + oid).css('display') == 'none') {
+			$("#dashboard_bottomcontent_" + oid).slideDown(300);
+			$(".dashboard_smallmeters_" + oid).fadeOut(300);			
+		} else {
+			$("#dashboard_bottomcontent_" + oid).slideUp(300);
+			$(".dashboard_smallmeters_" + oid).fadeIn(300);			
+		}
+		
+		
+	});
+</script>
+
+
+<div id="manager_right">
+	SALUT ANDREW
+
+
+</div>
+
+
+
+
+
+
+{% endblock %}

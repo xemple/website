@@ -1,0 +1,111 @@
+{% extends "manager/manager.html" %}
+
+
+{% block main_content %}
+<div class="title cblack">
+
+<div id="manager_left">
+
+	<img src="{{ MEDIA_URL }}/manager/img/title_panneaudecontrole.png"><br>
+	<div class="panel_cubename cgrey"><b>CUBE</b> / XC580 / La Castafiore</div>
+
+	<br>
+	
+	<div class="panel_item">
+		<div class="panel_item_icon"><img src="{{ MEDIA_URL }}/manager/img/panel_icon_package.png"></div>	
+		<div class="panel_item_title cdarkblue">Package Installer</div>
+		<div class="panel_item_descr cgrey">Add and remove applications.</div>
+	</div>	
+	
+	<div class="panel_item_spacer">&nbsp;</div>
+	
+	<div class="panel_item">
+		<div class="panel_item_icon"><img src="{{ MEDIA_URL }}/manager/img/panel_icon_mail.png"></div>	
+		<div class="panel_item_title cdarkblue">Mail manager</div>
+		<div class="panel_item_descr cgrey">Configure your mail services.</div>
+	</div>	
+	
+	<div class="panel_item_spacer">&nbsp;</div>
+	
+	<div class="panel_item">
+		<div class="panel_item_icon"><img src="{{ MEDIA_URL }}/manager/img/panel_icon_domains.png"></div>	
+		<div class="panel_item_title cdarkblue">Domain names</div>
+		<div class="panel_item_descr cgrey">Configure and manage your domain names.</div>
+	</div>		
+
+	<br>
+
+	<div class="panel_item">
+		<div class="panel_item_icon"><img src="{{ MEDIA_URL }}/manager/img/panel_icon_ftpssh.png"></div>	
+		<div class="panel_item_title cdarkblue">FTP / SSH</div>
+		<div class="panel_item_descr cgrey">Manage your FTP / SSH accounts.</div>
+	</div>	
+	
+	<div class="panel_item_spacer">&nbsp;</div>
+	
+	<div class="panel_item">
+		<div class="panel_item_icon"><img src="{{ MEDIA_URL }}/manager/img/panel_icon_statistics.png"></div>	
+		<div class="panel_item_title cdarkblue">Statistics</div>
+		<div class="panel_item_descr cgrey">Configure your mail services.</div>
+	</div>	
+	
+	<div class="panel_item_spacer">&nbsp;</div>
+	
+	<div class="panel_item">
+		<div class="panel_item_icon"><img src="{{ MEDIA_URL }}/manager/img/panel_icon_browser.png"></div>	
+		<div class="panel_item_title cdarkblue">Browser</div>
+		<div class="panel_item_descr cgrey">Browse your files and directory.</div>
+	</div>		
+
+	<br>
+
+	<div class="panel_item">
+		<div class="panel_item_icon"><img src="{{ MEDIA_URL }}/manager/img/panel_icon_cronjobs.png"></div>	
+		<div class="panel_item_title cdarkblue">Cronjobs</div>
+		<div class="panel_item_descr cgrey">Manage automatic tasks.</div>
+	</div>	
+	
+	<div class="panel_item_spacer">&nbsp;</div>
+	
+	<div class="panel_item">
+		<div class="panel_item_icon"><img src="{{ MEDIA_URL }}/manager/img/panel_icon_databases.png"></div>	
+		<div class="panel_item_title cdarkblue">Databases</div>
+		<div class="panel_item_descr cgrey">Manage databases and access.</div>
+	</div>	
+	
+	<div class="panel_item_spacer">&nbsp;</div>
+	
+	<div class="panel_item">
+		<div class="panel_item_icon"><img src="{{ MEDIA_URL }}/manager/img/panel_icon_advanced.png"></div>	
+		<div class="panel_item_title cdarkblue">Advanced mode</div>
+		<div class="panel_item_descr cgrey">Activate the advanced mode panel.</div>
+	</div>	
+
+</div>
+
+<script language="javascript">
+
+	$(".panel_item").mouseover(function(){
+		$(this).css('background-color', '#e4eaee');
+		$(this).css('border', '1px solid #a3becc');
+		
+	}).mouseout(function(){
+		$(this).css('background-color', '#f7f8f8');
+		$(this).css('border', '1px solid #f7f8f8');		
+	});
+
+</script>
+
+
+<div id="manager_right">
+	SALUT ANDREW
+
+
+</div>
+
+
+
+
+
+
+{% endblock %}

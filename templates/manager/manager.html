@@ -1,0 +1,56 @@
+{% extends "manager_base.html" %}
+
+{% block menu %}
+<div id="menu">
+	<a href="/"><img id="menu_link_hosting" class="menu_submenu" src="{{ MEDIA_URL }}/front/img/menu_hosting.png" data="hosting"></a>
+	<a href="/technology"><img id="menu_link_company" class="menu_submenu" src="{{ MEDIA_URL }}/front/img/menu_company.png" data="company"></a>
+	<a href="/labs"><img class="menu_link" src="{{ MEDIA_URL }}/front/img/menu_labs.png" data="labs"></a>
+	<a href="/status"><img class="menu_link" src="{{ MEDIA_URL }}/front/img/menu_assistance.png" data="assistance"></a>
+	<a href="/"><img class="menu_link" src="{{ MEDIA_URL }}/front/img/menu_espaceclient.png" data="espaceclient"></a>
+</div>
+
+<div id="submenu_hosting" class="submenu">
+	<img src="{{ MEDIA_URL }}/front/img/submenu_company_all.png">
+</div>
+
+<div id="submenu_company" class="submenu">
+	<img src="{{ MEDIA_URL }}/front/img/submenu_company_all.png">
+</div>
+
+<script language="javascript">
+
+	var timeout;
+	
+	var submenus = ["hosting", "company"];
+	
+	$(".menu_link").mouseover(function(){
+		$(this).attr('src', '{{ MEDIA_URL }}/front/img/menu_' + $(this).attr('data') + '_hover.png');
+	}).mouseout(function(){
+		$(this).attr('src', '{{ MEDIA_URL }}/front/img/menu_' + $(this).attr('data') + '.png');
+	});
+	
+	$(".menu_submenu").mouseover(function(){
+		if (timeout) clearTimeout(timeout);
+		for (x in submenus) {
+			if (submenus[x] != $(this).attr('data')) $("#submenu_" + submenus[x]).hide();
+		}
+		$("#submenu_" + $(this).attr('data')).fadeIn(150);
+	}).mouseout(function(){
+		timeout = setTimeout("submenu_hideall()", 300);
+	});
+
+	$(".submenu").mouseover(function(){
+		if (timeout) clearTimeout(timeout);
+		$("#submenu_" + $(this).attr('data')).fadeIn(150);
+	}).mouseout(function(){
+		timeout = setTimeout("submenu_hideall()", 300);
+	});
+	
+	function submenu_hideall() {
+		$(".submenu").fadeOut(150);
+	}
+
+</script>
+{% endblock %}
+
+

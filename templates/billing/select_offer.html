@@ -1,0 +1,4 @@
+{% for o in offers %}
+<a href="{% url cart_add_item o.id %}?back=/billing/select_options/{{ o.id }}">{{ o.name }}<img src="{{MEDIA_URL}}/front/lol/{{o.id}}.jpg"></a><br /><br /><br /><br />
+{% endfor %}
+
