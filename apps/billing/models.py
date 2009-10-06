@@ -67,6 +67,7 @@ class InvoiceItem(models.Model):
 	invoice			=	models.ForeignKey(Invoice)
 	description		=	models.CharField(max_length=500)
 	price			=	models.FloatField()
+	quantity		=	models.IntegerField()
 	
 	class Meta:
 		verbose_name = _('invoice item')
@@ -88,3 +89,9 @@ class Transaction(models.Model):
 		
 	def __unicode__(self):
 		return str(self.invoice)
+		
+		
+class MiniCart(object):
+	def __init__(self, item_id, quantity):
+		self.item_id = item_id
+		self.quantity = quantity

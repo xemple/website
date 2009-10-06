@@ -1,0 +1,16 @@
+{% for offer in offer_list %}
+<br />
+{{offer.name}}<br />
+{{offer.description}}<br />
+CPU Power :{{offer.cpu}}<br />
+RAM Size : {{offer.ram}}<br />
+Disk Space : {{offer.disk_space}}<br />
+<br />
+Price : {{ offer.price}}<br />
+<br />
+<br />
+<a href='{% url select_details offer.id %}'>[[[[[[[[[[ SELECT THIS OFFER ]]]]]]]]]]</a>
+<br />
+<br />
+<br />
+{% endfor %}

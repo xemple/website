@@ -1,8 +1,8 @@
 from django.db import models
 from django.utils.translation import ugettext_lazy as _
 from django.contrib.auth.models import User, UserManager
-from apps.ressources.countries import COUNTRY_CHOICES
-from apps.ressources.tools import xemple_username_generator
+from apps.resources.countries import COUNTRY_CHOICES
+from apps.resources.tools import xemple_username_generator
 
 import datetime
 
