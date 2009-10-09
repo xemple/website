@@ -82,6 +82,8 @@ INSTALLED_APPS = (
 
 
 AUTH_PROFILE_MODULE = "client.ClientProfile"
+LOGIN_URL = "/manager/login/"
+LOGIN_REDIRECT_URL = '/manager/'
 
 SESSION_EXPIRE_AT_BROWSER_CLOSE = True
 APPEND_SLASH = True

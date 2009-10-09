@@ -1,0 +1,9 @@
+{% extends "front_base.html" %}
+
+{% block main_content %}
+
+<p style="font-size:40px;">Your session is now closed </p><br />
+<p style="font-size:18px;"></p><a href='{% url manager_login %}'>. reconnect</a></p><br />
+<p style="font-size:18px;"></p><a href='{% url front_index %}'>. go to xemple.com</a></p><br />
+
+{% endblock %}

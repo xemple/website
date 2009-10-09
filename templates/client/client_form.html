@@ -1,4 +1,12 @@
+{% extends "front_base.html" %}
+
+{% block main_content %}
+<p style="font-size:27px;">Formulaire nouveau client</p><br /><br />
+
 <form action="." method="POST">
 {{ form.as_p }}
-<input type="submit" value="Submit" />
+<input type="submit" value="Submit" name="register" />
+<input type="hidden" name="next" value="{{ next }}" />
 </form>
+
+{% endblock %}

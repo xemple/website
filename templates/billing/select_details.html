@@ -1,3 +1,9 @@
+{% extends "front/front.html" %}
+
+
+
+{% block main_content %}
+
 {{offer.name}}<br />
 {{offer.description}}<br />
 CPU Power :{{offer.cpu}}<br />
@@ -32,3 +38,6 @@ Pay<br />
     <p><input type="submit" value="-- 12 Month --" /></p>
 </form>
 <br />
+
+
+{% endblock %}

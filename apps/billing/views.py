@@ -38,7 +38,7 @@ def verify_invoice(request):
 	quantity = selection.quantity
 	print offer
 	print quantity
-	return render_to_response('billing/verify_invoice.html', {}, context_instance=RequestContext(request))
+	return render_to_response('billing/verify_invoice.html', {'offer':offer, 'quantity':quantity}, context_instance=RequestContext(request))
 	
 	
 #### OPERATIONS

@@ -1,0 +1,45 @@
+{% extends "front_base.html" %}
+
+{% block main_content %}
+
+Xemple Authentication :
+<br />
+<br />
+________________________________________________
+<br />
+<br />
+
+HAVE A XEMPLE ACCOUNT ?
+
+{% block content %}
+
+{% if form.errors %}
+<span class="error">Following fields are required</span>
+{% endif %}
+<form method="post" action=".">
+
+{{ form.as_p }}
+
+
+
+<input type="submit" value="login" />
+<input type="hidden" name="next" value="{{ next }}" />
+</form>
+
+{% endblock %}
+
+<br />
+<br />
+<br />
+________________________________________________
+<br />
+<br />
+<br />
+NO, I'M A NEW XEMPLE USER !
+
+<form method="post" action="{%url client_new %}">
+<input type="submit" value="register" />
+<input type="hidden" name="next" value="{{ next }}" />
+</form>
+
+{% endblock %}

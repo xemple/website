@@ -14,7 +14,6 @@ admin.autodiscover()
 urlpatterns = patterns('',
 	(r'^', include('apps.front.urls')),
 	(r'^manager/', include('apps.manager.urls')),
-	(r'^client/', include('apps.client.urls')),
 	# temporary
 	(r'^offers/', include('apps.billing.urls')),
 	(r'^offer/', include('apps.billing.urls')),

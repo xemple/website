@@ -1,1 +1,19 @@
-lol {{ user.username }}
+{% extends "manager/manager.html" %}
+
+{% block main_content %}
+Bonjour {{ user.get_full_name }} !  -- -- -- --<a href='{% url manager_logout %}'>[LOGOUT]</a><br />
+<p style="font-size:10px;"> [ {{ user.email }} ]</p>
+<br />
+<br />
+<br />
+<br />
+GOTO : 
+<br />
+<br />
+<a href='{% url manager_dashboard %}'>-----> dev dashboard</a> <br />
+<a href='{% url manager_tdashboard %}'>-----> demo dashboard</a> <br />
+<a href='{% url manager_panel %}'>-----> prout</a> <br/>
+<a href='{% url manager_panel %}'>-----> cacalol</a> <br />
+
+<br />
+{% endblock %}

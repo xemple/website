@@ -1,20 +1,23 @@
-lol {{ user }} {{user.get_profile}}
+{% extends "manager/manager.html" %}
+
+{% block main_content %}
+Bonjour {{ user.get_full_name }} !  -- -- -- --<a href='{% url manager_logout %}'>[LOGOUT]</a><br />
+<p style="font-size:10px;"> [ {{ user.email }} ]</p>
 <br />
 <br />
 <br />
 <br />
-{% if cube_list %}
-%%% Your CUBES³ %%%
+{% if my_subs %}
+%%% Your Services %%%
 <br /><br />
+{% else %}
+%%% You have no business with us, FOO ! %%%
 {% endif %}
 <br />
-{% for c in cube_list %}
-Name : {{c.name}}<br />
-Size : {{c.parts}}³<br />
-Status : {{c.enabled}}<br />
-Ram : {{c.ram}}<br />
-Disk Space {{c.disk_space}}<br />
-IP : {{c.ip_address}}<br />
+{% for subscriptions in my_subs %}
+Subscription ID : {{my_subs.id}}<br />
+
 <br />
 <br />
 {% endfor %}
+{% endblock %}

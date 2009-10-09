@@ -1,3 +1,9 @@
+{% extends "front/front.html" %}
+
+
+
+{% block main_content %}
+
 {% for offer in offer_list %}
 <br />
 {{offer.name}}<br />
@@ -14,3 +20,5 @@ Price : {{ offer.price}}<br />
 <br />
 <br />
 {% endfor %}
+
+{% endblock %}
