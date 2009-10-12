@@ -6,6 +6,7 @@ urlpatterns = patterns('apps.billing.views',
 	url(r'^select_offer/$','select_offer', name='select_offer'),
 	url(r'^select_details/(?P<offer_id>\d+)/$','select_details', name='select_details'),
 	url(r'^verify_invoice/$','verify_invoice', name='verify_invoice'),
+	url(r'^paiment_exit/$','paiment_exit', name='paiment_exit'),
 	url(r'^create_minicart_item/item=(\d+)/qt=(\d+)/$', 'create_minicart_item', name='create_minicart_item'),
 
 )

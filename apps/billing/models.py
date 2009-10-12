@@ -35,7 +35,20 @@ class Subscription(models.Model):
 	def __unicode__(self):
 		return str("%s / %s") % (self.user, self.offer)
 	
-	
+
+
+
+class InvoiceManager(models.Manager):
+	def generate_invoice(self, user):
+		new_invoice = self.model(None,int(99), int(user.id), user.first_name, user.last_name, \
+								user.get_profile().address, user.get_profile().address_ext, user.get_profile().city, \
+								user.get_profile().zip_code, user.get_profile().country, user.email, user.get_profile().phone, \
+								user.get_profile().fax, user.get_profile().cellphone, datetime.datetime.today(), float(0.00) )
+		new_invoice.save()
+		new_invoice.invoice_num = int(new_invoice.id)
+		new_invoice.save()
+		return new_invoice
+		
 class Invoice(models.Model):
 	invoice_num		=	models.IntegerField()
 	user			=	models.ForeignKey(User)
@@ -50,9 +63,10 @@ class Invoice(models.Model):
 	phone			=	models.CharField(max_length=20)
 	fax				=	models.CharField(max_length=20)
 	cellphone		=	models.CharField(max_length=20)
-	date 			= 	models.DateField(default=datetime.datetime.today)
+	date 			= 	models.DateField(default=datetime.datetime.today())
 	tva				=	models.FloatField()
 	is_paid			=	models.BooleanField(default=False)
+	objects			=	InvoiceManager()
 	
 	class Meta:
 		verbose_name = _('invoice')

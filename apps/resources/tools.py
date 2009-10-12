@@ -39,3 +39,15 @@ def check_password(raw_password, enc_password):
 def make_random_password(length=10, allowed_chars='abcdefghjkmnpqrstuvwxyzABCDEFGHJKLMNPQRSTUVWXYZ23456789'):
     from random import choice
     return ''.join([choice(allowed_chars) for i in range(length)])
+
+
+def vat_rate_check(user):
+	pass
+
+
+def calculate_billing(user, item, quantity):
+	total_wot = float(item.price)*int(quantity)
+	vat_rate = float(19.6)
+	vat = total_wot/int(100)*float(19.6)
+	total_ti = total_wot+vat
+	return item.price, quantity, total_wot, vat_rate, round(vat,2), round(total_ti,2)
