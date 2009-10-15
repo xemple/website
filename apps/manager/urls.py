@@ -11,6 +11,8 @@ urlpatterns = patterns('apps.manager.views',
 	url(r'^tdashboard/$', 'manager_tdashboard', name='manager_tdashboard'),
 	url(r'^tadmin/$', 'manager_tadmin', name='manager_tadmin'),
 	url(r'^tpanel/$', 'manager_tpanel', name='manager_tpanel'),		
+	url(r'^accounting/invoices/$', 'accounting_invoices', name='accounting_invoices'),	
+	url(r'^accounting/invoice/details=(?P<invoice_id>\d+)/$', 'accounting_invoice_details', name='accounting_invoice_details'),	
 )
 
 urlpatterns += patterns('',

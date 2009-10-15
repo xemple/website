@@ -22,6 +22,8 @@ def client_new(request):
 		form = NewClientForm(request.POST)
 		if form.is_valid():
 			username, password = form.save()
+			print "USERNAME : %s" % username
+			print "PASSWORD : %s" % password
 			user = authenticate(username=username, password=password)
 			if user is not None:
 				if user.is_active:

@@ -1,0 +1,13 @@
+{% extends "front/front.html" %}
+
+
+
+{% block main_content %}
+
+{% ifequal answer 1 %}
+SUCCESS<br />
+<a href="{% url manager_tdashboard %}"><b> Click here to manage your service </b></a>
+{% else %}
+PROBLEM	
+{% endifequal %}	
+{% endblock %}

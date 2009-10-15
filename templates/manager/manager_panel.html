@@ -5,11 +5,28 @@ Bonjour {{ user.get_full_name }} !  -- -- -- --<a href='{% url manager_logout %}
 <p style="font-size:10px;"> [ {{ user.email }} ]</p>
 <br />
 <br />
+Pending Transactions :<br /><br />
+{% for t in pending_transactions %}
+{{ t.invoice.get_item.subscription }}<br />
+Duration : {{ t.invoice.get_item.quantity }} month <br />
+Invoice : {{ t.invoice }}<br />
+{{ t.invoice.invoice_item.description}}
+Trans. ID : {{ t.id }}<br />
+Amount : {{ t.price }}<br />
+Is Frozen : {% ifequal t.frozen 1 %}Frozen, pending for bank return<br />
+			{% else %} Check Status<br />
+			{% endifequal %}
+Is Paid : 	{% ifequal t.invoice.is_paid 1 %}Paid<br />
+			{% else %} Not Paid<br />
+			{% endifequal %}
+<br /><br /><br />
+{% endfor %}
 <br />
 <br />
 GOTO : 
 <br />
 <br />
+<a href='{% url accounting_invoices %}'>-----> dev invoices</a> <br />
 <a href='{% url manager_dashboard %}'>-----> dev dashboard</a> <br />
 <a href='{% url manager_tdashboard %}'>-----> demo dashboard</a> <br />
 <a href='{% url manager_panel %}'>-----> prout</a> <br/>

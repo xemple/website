@@ -9,7 +9,7 @@ def xemple_username_generator(fn, ln):
 	p1 = first_letters.upper()
 	total_user = User.objects.count()
 	user_number = total_user+1
-	username = '%s-%s@xemple' % (p1, user_number)
+	username = '%s%s_xemple' % (p1, user_number)
 	return '%s' % username
 	
 	
@@ -44,10 +44,13 @@ def make_random_password(length=10, allowed_chars='abcdefghjkmnpqrstuvwxyzABCDEF
 def vat_rate_check(user):
 	pass
 
+def calculate_vat(amount):
+	vat_rate = float(19.6)
+	vat = float(amount)/int(100)*vat_rate
+	return vat_rate, vat
 
 def calculate_billing(user, item, quantity):
 	total_wot = float(item.price)*int(quantity)
-	vat_rate = float(19.6)
-	vat = total_wot/int(100)*float(19.6)
+	vat_rate, vat = calculate_vat(total_wot)
 	total_ti = total_wot+vat
 	return item.price, quantity, total_wot, vat_rate, round(vat,2), round(total_ti,2)

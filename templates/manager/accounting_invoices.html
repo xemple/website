@@ -1,0 +1,24 @@
+{% extends "manager/manager.html" %}
+
+{% block main_content %}
+Bonjour {{ user.get_full_name }} !  -- -- -- --<a href='{% url manager_logout %}'>[LOGOUT]</a><br />
+<p style="font-size:10px;"> [ {{ user.email }} ]</p>
+<br />
+<br />
+<br />
+<br />
+{% for i in invoices %}
+<a href="{% url accounting_invoice_details i.id %}">
+<b>{{ i.date|date:'N j, Y' }}</b><br />
+Invoice ID : {{ i.id }}<br />
+Product : {{ i.get_item.subscription }} <br />
+Without VAT : {{ i.get_item.total }}<br />
+VAT Amount : {{ i.get_vat_amount }}<br />
+Total w. VAT : {{ i.get_total_with_vat }}<br />
+Status :	{% ifequal i.is_paid 1 %}Paid<br />
+			{% else %} Not Paid<br />
+			{% endifequal %}
+</a>
+<br /><br /><br />
+{% endfor %}
+{% endblock %}

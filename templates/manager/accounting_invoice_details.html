@@ -1,0 +1,30 @@
+{% extends "manager/manager.html" %}
+
+{% block main_content %}
+Bonjour {{ user.get_full_name }} !  -- -- -- --<a href='{% url manager_logout %}'>[LOGOUT]</a><br />
+<p style="font-size:10px;"> [ {{ user.email }} ]</p>
+<br />
+<br />
+<br />
+<br />
+{{ invoice.first_name }} {{ invoice.last_name }}<br />
+{{ invoice.email }}<br />
+{% if invoice.company %}
+{{ invoice.company}}<br />
+{% endif %}
+{{ invoice.address }}<br />
+{% if invoice.address_ext %}
+{{ invoice.address_ext}}<br />
+{% endif %}
+{{ invoice.city }}<br />
+{{ invoice.zip_code }}<br />
+{{ invoice.country }}<br />
+{{ invoice.telephone }}<br />
+Invoice ID : {{ invoice.id }}<br />
+Product : {{ invoice.get_item.subscription }} <br />
+Without VAT : {{ invoice.get_item.total }}<br />
+VAT Amount : {{ invoice.get_vat_amount }}<br />
+Total w. VAT : {{ invoice.get_total_with_vat }}<br />
+<br /><br /><br />
+
+{% endblock %}

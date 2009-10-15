@@ -17,7 +17,7 @@ Total : {{ total_ti }} euros<br />
 <br />
 <br />
 <br />
-<a href='{% url paiment_exit %}'>--------> Next</a>				
+			
 
 
 
@@ -28,7 +28,13 @@ ________________________________________________
 <br />
 <br />
 <br />
+{% if form.errors %}&nbsp;
+prout
+{{ form.errors|join:", " }}
+{% endif %}
 <form method="post" action="">
+
+	{{ form }}<br />
 <input type="submit" value="test if user same as loading" />
 </form>				
 {% endblock %}
