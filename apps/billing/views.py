@@ -67,7 +67,6 @@ def verify_invoice(request):
 @login_required			
 def pay_invoice(request, invoice_id):
 	transaction = Invoice.objects.get(id=invoice_id).get_last_transaction()
-	print transaction
 	return render_to_response('billing/pay_invoice.html', {'transaction':transaction}, context_instance=RequestContext(request))
 	
 @login_required
