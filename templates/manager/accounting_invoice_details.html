@@ -7,24 +7,32 @@ Bonjour {{ user.get_full_name }} !  -- -- -- --<a href='{% url manager_logout %}
 <br />
 <br />
 <br />
-{{ invoice.first_name }} {{ invoice.last_name }}<br />
-{{ invoice.email }}<br />
+First name : <b>{{ invoice.first_name }} </b><br />
+Last Name : <b>{{ invoice.last_name }}</b><br />
+E-mail : <b>{{ invoice.email }}</b><br />
 {% if invoice.company %}
-{{ invoice.company}}<br />
+Company : <b>{{ invoice.company}}</b><br />
 {% endif %}
-{{ invoice.address }}<br />
+Address : <b>{{ invoice.address }}</b><br />
 {% if invoice.address_ext %}
-{{ invoice.address_ext}}<br />
+Address : <b>{{ invoice.address_ext}}</b><br />
 {% endif %}
-{{ invoice.city }}<br />
-{{ invoice.zip_code }}<br />
-{{ invoice.country }}<br />
-{{ invoice.telephone }}<br />
-Invoice ID : {{ invoice.id }}<br />
-Product : {{ invoice.get_item.subscription }} <br />
-Without VAT : {{ invoice.get_item.total }}<br />
-VAT Amount : {{ invoice.get_vat_amount }}<br />
-Total w. VAT : {{ invoice.get_total_with_vat }}<br />
+City : <b>{{ invoice.city }}</b><br />
+Zip Code : <b>{{ invoice.zip_code }}</b><br />
+Country : <b>{{ invoice.country }}</b><br />
+Phone : <b>{{ invoice.phone }}</b><br />
+{% if invoice.fax %}
+Fax : <b>{{ invoice.fax}}</b><br />
+{% endif %}
+{% if invoice.cellphone %}
+Cellphone : <b>{{ invoice.cellphone}}</b><br />
+{% endif %}
+<br />
+Invoice ID : <b>{{ invoice.id }}</b><br />
+Product : <b>{{ invoice.get_item.subscription }}</b> <br />
+Without VAT : <b>{{ invoice.get_item.total }} euros</b><br />
+VAT Amount : <b>{{ invoice.get_vat_amount }} euros</b><br />
+Total w. VAT : <b>{{ invoice.get_total_with_vat }} euros</b><br />
 <br /><br /><br />
 
 {% endblock %}

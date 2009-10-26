@@ -16,6 +16,21 @@
 	<body> 
 		<div id="header"> 
 		<a href="{% url user_bank_return transaction.id %}">	<font size="3" color="red">>>>>>>>>>>>>>>>>>>> LIEN TEST DE RETOUR <<<<<<<<<<<<<<<<<<< </font></a><br /><br />
+		
+		
+				<!-- <input type="hidden" name="back" value="/billing/verify_invoice" />-->
+				
+				
+		<form method="post" action="{% url temporary_bank_return_validator transaction.id,'ok' %}">
+		    <p><input type="hidden" name="quantity" value="ok"/></p>
+		    <p><input type="submit" value="SIMULER UN RETOUR POSITIF DE LA BANQUE" /></p>
+		</form>
+		
+		<form method="post" action="{% url temporary_bank_return_validator transaction.id,'error' %}">
+		    <p><input type="hidden" name="quantity" value="ok"/></p>
+		    <p><input type="submit" value="SIMULER UN RETOUR NEGATIF DE LA BANQUE" /></p>
+		</form>
+		
 			<a href="http://www.cmcicpaiement.fr"><img src="{{MEDIA_URL}}/development/logocmcicpaiement.gif" alt="CM-CIC P@iement" title="CM-CIC P@iement" /></a> 
 		</div> 
 		

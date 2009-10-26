@@ -14,7 +14,5 @@ urlpatterns = patterns('django.views.generic.simple',
 	url(r'^why/$', 'direct_to_template', {'template': 'front/why.html'}, name='front_why'),	
 	url(r'^faq/$', 'direct_to_template', {'template': 'front/faq.html'}, name='front_faq'),
 	url(r'^about/$', 'direct_to_template', {'template': 'front/about.html'}, name='front_about'),
-					
-
-
+			
 )

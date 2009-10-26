@@ -14,8 +14,10 @@ Bonjour {{ user.get_full_name }} !  -- -- -- --<a href='{% url manager_logout %}
 %%% You have no business with us, FOO ! %%%
 {% endif %}
 <br />
-{% for subscriptions in my_subs %}
-Subscription ID : {{my_subs.id}}<br />
+{% for sub in my_subs %}
+Service : {{ sub.offer.name }} (id : {{sub.id}})<br />
+Expire le {{ sub.expiracy|date:"d/m/Y" }}<br />
+
 
 <br />
 <br />

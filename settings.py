@@ -50,6 +50,7 @@ MIDDLEWARE_CLASSES = (
 	'django.middleware.doc.XViewMiddleware',
 	'django.contrib.flatpages.middleware.FlatpageFallbackMiddleware',
 	'debug_toolbar.middleware.DebugToolbarMiddleware',
+	'django.contrib.csrf.middleware.CsrfMiddleware',
 )
 
 AUTHENTICATION_BACKENDS = (

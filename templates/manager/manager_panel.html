@@ -21,6 +21,16 @@ Is Paid : 	{% ifequal t.invoice.is_paid 1 %}Paid<br />
 			{% endifequal %}
 <br /><br /><br />
 {% endfor %}
+{% for s in subscription %}
+{% if s.time_is_running_out %}
+Subscription (id :{{ s.id }}) will expire soon<br />
+Click Here to Renew your Subscription<br />
+<form method="post" action=".">
+    <p><input type="hidden" name="sub_id" value="{{s.id}}"/></p>
+    <p><input type="submit" value="RENEW" name="renew" /></p>
+</form>
+{% endif %}
+{% endfor %}
 <br />
 <br />
 GOTO : 

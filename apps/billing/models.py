@@ -4,6 +4,14 @@ from django.contrib.auth.models import User
 from apps.service.models import Service
 from apps.resources.tools import calculate_billing, calculate_vat
 import datetime
+from dateutil.relativedelta import *
+
+
+class MiniCart(object):
+	def __init__(self, item_id, quantity, renew_sub = None):
+		self.item_id = item_id
+		self.quantity = quantity
+		self.renew_sub = renew_sub
 
 
 class Offer(models.Model):
@@ -47,6 +55,35 @@ class Subscription(models.Model):
 		
 	def __unicode__(self):
 		return str("%s / %s") % (self.user, self.offer)
+		
+	def expiracy_countdown(self):
+		expiracy_delta = relativedelta(self.expiracy, datetime.date.today())
+		return expiracy_delta
+		
+	def send_expiracy_alert(self):
+		expiracy_delta = self.expiracy_countdown
+		alarm = [relativedelta(days=+15), relativedelta(days=+10), relativedelta(days=+5)]
+		answer = False
+		print expiracy_delta
+		for t in alarm:
+			print "There is %s days left" % expiracy_delta.days
+			try :
+				if expiracy_delta == t:
+					print "ALARM !!! Expire dans %s jour" % t.days
+					answer = True
+			except ValueError:
+				continue
+		return answer
+		
+	def time_is_running_out(self):
+		answer = False
+		if self.expiracy_countdown() < relativedelta(days=+15):
+			answer = True
+		return answer
+		
+	def renew_subscription(self):
+		request.session['mycart'] = MiniCart(item_id=int(self.offer.id), quantity=int(0), renew_sub=int(self.id))
+		return HttpResponseRedirect(reverse(renew_duration_choice))
 	
 
 
@@ -92,16 +129,12 @@ class Invoice(models.Model):
 		return str(self.id)
 	
 	def get_item(self):
-		item = self.invoice_item.all()[:1]
-		for i in item:
-			resp = i
-		return i
+		item = self.invoice_item.latest('id')
+		return item
 		
 	def get_last_transaction(self):
-		trans = self.linked_transaction.all()[:1]
-		for t in trans:
-			resp = t
-		return t
+		trans = self.linked_transaction.latest('id')
+		return trans
 		
 	def get_vat_amount(self):
 		amount_without_vat = self.get_item().total()
@@ -112,6 +145,14 @@ class Invoice(models.Model):
 		total_wo_vat = self.get_item().total()
 		vat = self.get_vat_amount()
 		return round(float(total_wo_vat)+float(vat), 2)
+		
+	def activate_subscriptions(self):
+		subscriptions = self.invoice_item.all()
+		for s in subscriptions :
+			renew_time = s.quantity
+			s.subscription.expiracy = datetime.date.today()+relativedelta(months=+renew_time)
+			s.subscription.save()
+		return True
 	
 	
 	
@@ -172,13 +213,18 @@ class Transaction(models.Model):
 	def __unicode__(self):
 		return str(self.id)
 		
+	def validate(self):
+		self.invoice.is_paid = True
+		self.invoice.save()
+		self.frozen = False
+		self.date = datetime.date.today()
+		self.invoice.activate_subscriptions()
+		self.save()
+		return True
 		
+	def cancel(self):
+		self.frozen = False
+		self.date = datetime.date.today()
+		self.save()
+		return True
 		
-		
-		
-		
-		
-class MiniCart(object):
-	def __init__(self, item_id, quantity):
-		self.item_id = item_id
-		self.quantity = quantity

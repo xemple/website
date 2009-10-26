@@ -3,6 +3,15 @@ from django.utils.hashcompat import md5_constructor, sha_constructor
 from django.contrib.auth.models import User
 
 
+
+#          .
+#         / \
+#       /  |  \
+#     /    |    \		WORK IN PROGRESS
+#   /      o      \   
+# /_________________\
+
+
 def xemple_username_generator(fn, ln):
 	fn, ln =fn.strip(), ln.strip()
 	first_letters = '%s%s' % (fn[:1], ln[:1])
@@ -54,3 +63,21 @@ def calculate_billing(user, item, quantity):
 	vat_rate, vat = calculate_vat(total_wot)
 	total_ti = total_wot+vat
 	return item.price, quantity, total_wot, vat_rate, round(vat,2), round(total_ti,2)
+	
+def render_to_pdf(template_src, context_dict):
+	from django import http
+	from django.shortcuts import render_to_response
+	from django.template.loader import get_template
+	from django.template import Context
+	import ho.pisa as pisa
+	import cStringIO as StringIO
+	import cgi
+	
+	template = get_template(template_src)
+	context = Context(context_dict)
+	html  = template.render(context)
+	result = StringIO.StringIO()
+	pdf = pisa.pisaDocument(StringIO.StringIO(html.encode("ISO-8859-1")), result)
+	if not pdf.err:
+		return http.HttpResponse(result.getvalue(), mimetype='application/pdf')
+	return http.HttpResponse('We had some errors<pre>%s</pre>' % cgi.escape(html))

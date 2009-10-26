@@ -1,10 +1,25 @@
 {% extends "front_base.html" %}
 
 {% block main_content %}
-<p style="font-size:27px;">Formulaire nouveau client</p><br /><br />
-
+<p style="font-size:27px;"><b>Formulaire nouveau client</b></p><br /><br />
+{% if form.errors %}
+Please correct the errors below:
+{% endif %}
 <form action="." method="POST">
-{{ form.as_p }}
+First name : {{ form.first_name }}{% if form.email.errors %}{{ form.first_name.errors|join:", " }}{% endif %}<br />
+Last name : {{ form.last_name }}{% if form.email.errors %}{{ form.last_name.errors|join:", " }}{% endif %}<br />
+Company (opt) : {{ form.company }}{% if form.email.errors %}{{ form.company.errors|join:", " }}{% endif %}<br />
+E-mail  : {{ form.email }} {% if form.email.errors %}{{ form.email.errors|join:", " }}{% endif %}<br />
+Address : {{ form.address }}{% if form.email.errors %}{{ form.address.errors|join:", " }}{% endif %}<br />
+Address (opt) : {{ form.address_ext }}{% if form.email.errors %}{{ form.address_ext.errors|join:", " }}{% endif %}<br />
+City  : {{ form.city }}{% if form.email.errors %}{{ form.city.errors|join:", " }}{% endif %}<br />
+Zip Code  : {{ form.zip_code }}{% if form.email.errors %}{{ form.zip_code.errors|join:", " }}{% endif %}<br />
+Country  : {{ form.country }}{% if form.email.errors %}{{ form.country.errors|join:", " }}{% endif %}<br />
+Phone  : {{ form.phone }}{% if form.email.errors %}{{ form.phone.errors|join:", " }}{% endif %}<br />
+Fax (opt)  : {{ form.fax }}{% if form.email.errors %}{{ form.fax.errors|join:", " }}{% endif %}<br />
+Cellphone (opt) : {{ form.cellphone }}{% if form.email.errors %}{{ form.cellphone.errors|join:", " }}{% endif %}<br />
+<br />
+<br />
 <input type="submit" value="Submit" name="register" />
 <input type="hidden" name="next" value="{{ next }}" />
 </form>

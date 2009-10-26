@@ -4,7 +4,7 @@ from django.conf import settings
 from django.db import transaction
 from django.template import RequestContext
 from django.core.urlresolvers import reverse
-from django.http import HttpResponseRedirect
+from django.http import HttpResponseRedirect, HttpResponse
 from django.views.decorators.cache import cache_control
 from django.contrib.auth.decorators import login_required
 from django.contrib.auth import authenticate, login
@@ -37,6 +37,7 @@ def select_details(request, offer_id):
 	
 #3
 @login_required
+@transaction.commit_on_success
 def verify_invoice(request):
 	user=request.user
 	try:
@@ -61,7 +62,42 @@ def verify_invoice(request):
 																'total_wot':total_wot, 'vat_rate':vat_rate, 
 																'vat':vat, 'total_ti':total_ti, 'offer':offer, 'user':user, 'form':form }, 
 																context_instance=RequestContext(request))
-											
+
+
+#          .
+#         / \
+#       /  |  \
+#     /    |    \		WORK IN PROGRESS
+#   /      o      \   
+# /_________________\		
+							
+@login_required
+def renew_duration_choice(request):
+	user=request.user
+	try:
+		request.session['mycart']
+	except KeyError:
+		return HttpResponseRedirect(reverse('manager_panel'))
+	renew_cart = request.session['mycart']
+	sub = Subscription.objects.get(id=renew_cart.renew_sub)
+	if not sub.user.id == user.id:
+		return HttpResponseRedirect(reverse(front_index)) 
+	if request.method == 'POST':
+		form = VerifyInvoiceCheck(request.POST)
+		if form.is_valid():
+			print "prout"
+	form = VerifyInvoiceCheck()
+	return render_to_response('billing/renew_subscription.html', {'subscription':sub}, context_instance=RequestContext(request))
+	
+#          .
+#         / \
+#       /  |  \
+#     /    |    \		WORK IN PROGRESS
+#   /      o      \   
+# /_________________\	
+									
+
+
 											
 #4
 @login_required			
@@ -70,6 +106,7 @@ def pay_invoice(request, invoice_id):
 	return render_to_response('billing/pay_invoice.html', {'transaction':transaction}, context_instance=RequestContext(request))
 	
 @login_required
+@transaction.commit_on_success
 def user_bank_return(request, transaction_id):
 	transaction = Transaction.objects.get(id=transaction_id)
 	if transaction.frozen == False and transaction.invoice.is_paid == True:
@@ -77,6 +114,20 @@ def user_bank_return(request, transaction_id):
 	else:
 		answer = False
 	return render_to_response('billing/user_bank_return.html', {'answer':answer}, context_instance=RequestContext(request))
+	
+	
+def temporary_bank_return_validator(request, trans_num, status):
+	# récupération d'un FORM POST. recup ID pour le moment
+	transaction = Transaction.objects.get(id=trans_num)
+	if status == u'ok':
+		transaction.validate()
+	#MESSAGE POUR LA BANQUE : 	reply_to_bank = "well received"
+	elif status == u'error':
+		transaction.cancel()
+	#MESSAGE POUR LA BANQUE : 	reply_to_bank = "well received"
+	else :
+		print 'SOMETHING IS GOING WRONG =[[[[['
+	return HttpResponse("Bank return received")
 		
 
 #### OPERATIONS
