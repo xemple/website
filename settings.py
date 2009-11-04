@@ -41,6 +41,7 @@ TEMPLATE_CONTEXT_PROCESSORS = (
 	'django.core.context_processors.debug',
 	'django.core.context_processors.i18n',
 	'django.core.context_processors.media',
+
 )
 
 MIDDLEWARE_CLASSES = (
@@ -50,7 +51,6 @@ MIDDLEWARE_CLASSES = (
 	'django.middleware.doc.XViewMiddleware',
 	'django.contrib.flatpages.middleware.FlatpageFallbackMiddleware',
 	'debug_toolbar.middleware.DebugToolbarMiddleware',
-	'django.contrib.csrf.middleware.CsrfMiddleware',
 )
 
 AUTHENTICATION_BACKENDS = (
@@ -78,6 +78,7 @@ INSTALLED_APPS = (
 	'apps.resources',
 	'apps.service',
 	'apps.billing',
+	'apps.support',
 
 )
 

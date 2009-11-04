@@ -44,3 +44,11 @@ class ClientProfile(models.Model):
 		
 	def __unicode__(self):
 		return self.user.username
+		
+
+"""
+mail_expiracy_alerts 		=	models.BooleanField(_('receive expiracy alerts'), default=True)
+expiracy_mail_start			=	models.CharField(_('expiracy mail start'), max_length=2)
+receive_newletter			=	models.BooleanField(_('receive newletter'), default=False)
+mail_ticket_answer 			=	models.BooleanField(_('mail ticket answer'), default=True)
+"""

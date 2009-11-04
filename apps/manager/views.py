@@ -10,7 +10,7 @@ from django.contrib.auth import authenticate, login
 from django.contrib.auth.decorators import login_required
 from django.shortcuts import render_to_response, get_object_or_404
 from django.contrib.contenttypes.models import ContentType
-from apps.billing.models import Subscription, Transaction, Invoice
+from apps.billing.models import Subscription, Transaction, Invoice, MiniCart
 from apps.resources.tools import render_to_pdf
 
 
@@ -31,8 +31,8 @@ def manager_panel(request):
 			print 'boudin'
 			sub_to_renew = request.POST['sub_id']
 			sub = Subscription.objects.get(id=sub_to_renew)
-			print sub.renew_subscription
-			return sub.renew_subscription
+			request.session['mycart'] = MiniCart(item_id=int(sub.offer.id), quantity=int(0), renew_sub=int(sub.id))
+			return HttpResponseRedirect(reverse('renew_duration_choice'))
 	return render_to_response('manager/manager_panel.html', {'pending_transactions':pending_transactions, 'invoice_item':invoice_item, 'subscription':subscription}, context_instance=RequestContext(request))
 	
 @login_required	

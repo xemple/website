@@ -5,6 +5,7 @@ from apps.service.models import Service
 from apps.resources.tools import calculate_billing, calculate_vat
 import datetime
 from dateutil.relativedelta import *
+from django.core.mail import send_mail
 
 
 class MiniCart(object):
@@ -56,33 +57,60 @@ class Subscription(models.Model):
 	def __unicode__(self):
 		return str("%s / %s") % (self.user, self.offer)
 		
+	def has_service(self):
+		answer = False
+		if self.service is not None:
+			answer = True
+		return answer
+			
 	def expiracy_countdown(self):
 		expiracy_delta = relativedelta(self.expiracy, datetime.date.today())
+		print expiracy_delta
 		return expiracy_delta
 		
 	def send_expiracy_alert(self):
+		print "KAKA"
 		expiracy_delta = self.expiracy_countdown
 		alarm = [relativedelta(days=+15), relativedelta(days=+10), relativedelta(days=+5)]
 		answer = False
-		print expiracy_delta
 		for t in alarm:
-			print "There is %s days left" % expiracy_delta.days
 			try :
 				if expiracy_delta == t:
-					print "ALARM !!! Expire dans %s jour" % t.days
+					send_mail('Un de vos services va expirer', 'Le Service Prout va expirer', 'from@example.com',['to@example.com'], fail_silently=False)
 					answer = True
 			except ValueError:
 				continue
 		return answer
 		
 	def time_is_running_out(self):
-		answer = False
-		if self.expiracy_countdown() < relativedelta(days=+15):
-			answer = True
+		answer = None
+		alarm_delta = relativedelta(days=+15)
+		result = datetime.datetime.now()+alarm_delta
+		if result >= self.expiracy :
+			answer = self.expiracy_countdown()
+		print answer
 		return answer
+	
+	def has_problem(self):
+		answer = None
+		if self.service == None:
+			answer = "Server doesn't exists."
+		else:
+			if self.service.is_active == False:
+				answer = 'Server is shuted-down.'
+		if datetime.datetime.today() > self.expiracy:
+			answer = 'Your subscription has expire.'
+		return answer
+	
+	def service_name(self):
+		if self.service is not None:
+			answer = self.service.name
+		else:
+			answer = self.offer.name
+		return u'%s' % answer
 		
 	def renew_subscription(self):
-		request.session['mycart'] = MiniCart(item_id=int(self.offer.id), quantity=int(0), renew_sub=int(self.id))
+		#LOL REQUEST = ]]]]]    request.session['mycart'] = MiniCart(item_id=int(self.offer.id), quantity=int(0), renew_sub=int(self.id))
 		return HttpResponseRedirect(reverse(renew_duration_choice))
 	
 

@@ -21,6 +21,10 @@
 	</div>
 </div>
 
+<div align="right" style="font-size:13px;">
+Bonjour {{ user.get_full_name }} !&nbsp;&nbsp;  <a href='{% url manager_logout %}'>[LOGOUT]&nbsp;&nbsp;</a>
+</div>
+
 <div id="content">
 	<div id="content_container">
 		{% block main_content %}{% endblock %}

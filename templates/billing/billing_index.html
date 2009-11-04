@@ -1,0 +1,63 @@
+{% extends "manager/manager.html" %}
+
+
+{% block main_content %}
+
+
+<div align="center">
+	
+	
+<a href="{% url select_offer %}"><img src="{{ MEDIA_URL }}/development/dev_addservice.png" width="120" height="120"></a>
+&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;
+&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;
+<a href="{% url select_offer %}"><img src="{{ MEDIA_URL }}/development/dev_renewselected.png" width="120" height="120"></a>
+
+<br /><br />
+<br />
+<br />
+my Subscriptions :
+<br />
+<br />
+<br />
+{% for s in mysubscriptions %}
+<div style="border: thin solid #000000; background-color: #00b9da; width: 400px;">
+Name : 	{% ifnotequal s.has_service None %} 
+		{{s.service}} 
+		{% else %}
+		<img src="{{ MEDIA_URL }}/development/dev_warning.png" width="20" height="20"> No service running <img src="{{ MEDIA_URL }}/development/dev_warning.png" width="20" height="20">
+		{% endifnotequal %}<br />
+Offer type : {{ s.offer }}<br />
+Expiracy : {{ s.expiracy|date:'N j, Y' }}<br />
+</div>
+<br />
+<br />
+
+
+{% endfor %}
+
+
+</div>
+
+
+<br />
+<br /><br />
+
+__________________________________________________________________________
+<br /><br /><br />
+Last invoices<br /><br /><br />
+{% for i in invoices %}
+<a href="{% url accounting_invoice_details i.id %}">
+<b>{{ i.date|date:'N j, Y' }}<br />
+Amount: {{ i.get_total_with_vat }} €<br />
+Status :	{% ifequal i.is_paid 1 %}Paid<br />
+			{% else %} Not Paid<br />
+			{% endifequal %}
+</a>
+<br /><br /><br />
+{% endfor %}
+
+
+
+{% endblock %}
+
+

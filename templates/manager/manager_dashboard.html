@@ -1,25 +1,57 @@
 {% extends "manager/manager.html" %}
 
 {% block main_content %}
-Bonjour {{ user.get_full_name }} !  -- -- -- --<a href='{% url manager_logout %}'>[LOGOUT]</a><br />
-<p style="font-size:10px;"> [ {{ user.email }} ]</p>
+
+<img src="{{ MEDIA_URL }}/development/dev_dashboard.png" width="100" height="100">
 <br />
 <br />
-<br />
-<br />
+<div align="center">
 {% if my_subs %}
-%%% Your Services %%%
+Your Services 
 <br /><br />
 {% else %}
 %%% You have no business with us, FOO ! %%%
 {% endif %}
 <br />
-{% for sub in my_subs %}
-Service : {{ sub.offer.name }} (id : {{sub.id}})<br />
-Expire le {{ sub.expiracy|date:"d/m/Y" }}<br />
 
+
+
+{% for sub in my_subs %}
+
+
+
+
+{% ifnotequal sub.has_problem None %} 
+<div style="border: thin solid #000000; background-color: #ff1515; width: 400px;">
+	<img src="{{ MEDIA_URL }}/development/dev_warning.png" width="20" height="20"> {{ sub.has_problem }} <img src="{{ MEDIA_URL }}/development/dev_warning.png" width="20" height="20">
+</div>
+{% else %}
+<div style="border: thin solid #000000; background-color: #2aff00; width: 400px;">
+Service is running perfectly
+</div>
+{% endifnotequal %}
+
+
+
+
+
+
+<div style="border: thin solid #000000; background-color: #00b9da; width: 400px;">
+<img src="{{ MEDIA_URL }}/development/dev_service.png" width="50" height="50">Server name : {{ sub.service_name }}<br />
+{% ifnotequal sub.time_is_running_out None %}
+<div style="background-color: #fc9400; width: 400;">
+<img src="{{ MEDIA_URL }}/development/dev_warning.png" width="20" height="20">
+{% endifnotequal %} 
+Expire le {{ sub.expiracy|date:"d/m/Y" }}
+{% ifnotequal sub.time_is_running_out None %}
+<img src="{{ MEDIA_URL }}/development/dev_warning.png" width="20" height="20">
+</div>
+{% endifnotequal %}
+<br />
+</div>
 
 <br />
 <br />
 {% endfor %}
+</div>
 {% endblock %}

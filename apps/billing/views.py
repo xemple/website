@@ -18,8 +18,13 @@ from apps.billing.forms import VerifyInvoiceCheck
 
 
 #### PAGES
-
-
+@login_required
+def billing_index(request):
+	mysubscriptions = Subscription.objects.select_related().filter(user=request.user)
+	invoices = Invoice.objects.filter(user=request.user)
+	return render_to_response('billing/billing_index.html', {'mysubscriptions':mysubscriptions, 'invoices':invoices}, context_instance=RequestContext(request))
+	
+	
 def temporary_offers_page(request):
 	return render_to_response('billing/temporary_offers_page.html', {}, context_instance=RequestContext(request))
 

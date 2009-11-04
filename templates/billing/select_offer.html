@@ -1,13 +1,12 @@
-{% extends "front/front.html" %}
-
+{% extends "manager/manager.html" %}
 
 
 {% block main_content %}
 
 {% for offer in offer_list %}
 <br />
-{{offer.name}}<br />
-{{offer.description}}<br />
+<img src="{{ MEDIA_URL }}/development/dev_service.png" width="50" height="50"><b>{{offer.name}}</b><br /><br />
+{{offer.description|linebreaksbr}}<br /><br />
 CPU Power :{{offer.cpu}}<br />
 RAM Size : {{offer.ram}}<br />
 Disk Space : {{offer.disk_space}}<br />
@@ -15,7 +14,7 @@ Disk Space : {{offer.disk_space}}<br />
 Price : {{ offer.price}}<br />
 <br />
 <br />
-<a href='{% url select_details offer.id %}'>[[[[[[[[[[ SELECT THIS OFFER ]]]]]]]]]]</a>
+<a href='{% url select_details offer.id %}'><img src="{{ MEDIA_URL }}/development/dev_greenbox.png" width="30" height="30"> SELECT THIS OFFER</a>
 <br />
 <br />
 <br />

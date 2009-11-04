@@ -1,0 +1,35 @@
+{% extends "manager/manager.html" %}
+
+
+{% block main_content %}
+
+
+<div align="left" style="font-size:13px;">
+	<a href="{% url myaccount %}"><img src="{{ MEDIA_URL }}/development/dev_myaccount.png" width="100" height="100"></a>
+</div>
+
+<br />
+<br />
+<br />
+<br />
+<br />
+<br />
+
+
+
+<div align="center">
+	
+	
+<a href="{% url manager_dashboard %}"><img src="{{ MEDIA_URL }}/development/dev_editmypassword.png" width="150" height="150"></a>
+&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;
+
+
+<a href="{% url manager_dashboard %}"><img src="{{ MEDIA_URL }}/development/dev_editmyinfos.png" width="150" height="150"></a>
+&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;
+
+
+<a href="{% url manager_dashboard %}"><img src="{{ MEDIA_URL }}/development/dev_editmypreferences.png" width="150" height="150"></a>
+&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;
+</div>
+{% endblock %}
+

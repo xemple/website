@@ -15,7 +15,12 @@ from apps.client.models import ClientProfile
 from django.contrib.auth import REDIRECT_FIELD_NAME
 
 
+def myaccount(request):
 
+	return render_to_response('client/my_account.html', {}, context_instance=RequestContext(request))
+	
+	
+	
 def client_new(request):
 	redirect_to = request.REQUEST.get('next', '')
 	if request.POST.has_key('register'):

@@ -1,11 +1,11 @@
-{% extends "front/front.html" %}
+{% extends "manager/manager.html" %}
 
 
 
 {% block main_content %}
 
-Selected Offer : {{ offer.name }}<br />
-Description : {{ offer.description }}<br />
+Selected Offer : <img src="{{ MEDIA_URL }}/development/dev_service.png" width="50" height="50"><b>{{offer.name}}</b><br /><br />
+Description : {{ offer.description|linebreaksbr }}<br />
 <br /><br />													
 Price / U : {{ offer_price }} euros<br />
 Period : {{ quantity }} month<br />

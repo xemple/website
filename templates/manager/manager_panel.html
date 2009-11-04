@@ -1,46 +1,59 @@
 {% extends "manager/manager.html" %}
 
 {% block main_content %}
-Bonjour {{ user.get_full_name }} !  -- -- -- --<a href='{% url manager_logout %}'>[LOGOUT]</a><br />
-<p style="font-size:10px;"> [ {{ user.email }} ]</p>
+
 <br />
 <br />
-Pending Transactions :<br /><br />
-{% for t in pending_transactions %}
-{{ t.invoice.get_item.subscription }}<br />
-Duration : {{ t.invoice.get_item.quantity }} month <br />
-Invoice : {{ t.invoice }}<br />
-{{ t.invoice.invoice_item.description}}
-Trans. ID : {{ t.id }}<br />
-Amount : {{ t.price }}<br />
-Is Frozen : {% ifequal t.frozen 1 %}Frozen, pending for bank return<br />
-			{% else %} Check Status<br />
-			{% endifequal %}
-Is Paid : 	{% ifequal t.invoice.is_paid 1 %}Paid<br />
-			{% else %} Not Paid<br />
-			{% endifequal %}
-<br /><br /><br />
-{% endfor %}
-{% for s in subscription %}
-{% if s.time_is_running_out %}
-Subscription (id :{{ s.id }}) will expire soon<br />
-Click Here to Renew your Subscription<br />
-<form method="post" action=".">
-    <p><input type="hidden" name="sub_id" value="{{s.id}}"/></p>
-    <p><input type="submit" value="RENEW" name="renew" /></p>
-</form>
+<a href="{% url manager_dashboard %}"><img src="{{ MEDIA_URL }}/development/dev_dashboard.png" width="120" height="120"></a>
+&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;
+<a href="{% url billing %}"><img src="{{ MEDIA_URL }}/development/dev_billing.png" width="120" height="120"></a>
+&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;
+<a href="{% url myaccount %}"><img src="{{ MEDIA_URL }}/development/dev_myaccount.png" width="120" height="120"></a>
+&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;
+<a href="{% url select_offer %}"><img src="{{ MEDIA_URL }}/development/dev_addservice.png" width="120" height="120"></a>
+&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;
+<a href="{% url mytickets %}"><img src="{{ MEDIA_URL }}/development/dev_helpdesk.png" width="120" height="120"></a>
+<br /><br />
+<br /><br />
+<br /><br />
+<br /><br />
+<br />
+{% if pending_transactions %}
+Alerts  :<br /><br />
+	{% for t in pending_transactions %}
+		{{ t.invoice.get_item.subscription }}<br />
+		Duration : {{ t.invoice.get_item.quantity }} month <br />
+		Invoice : {{ t.invoice }}<br />
+		{{ t.invoice.invoice_item.description}}
+		Trans. ID : {{ t.id }}<br />
+		Amount : {{ t.price }}<br />
+		Is Frozen : {% ifequal t.frozen 1 %}Frozen, pending for bank return<br />
+					{% else %} Check Status<br />
+					{% endifequal %}
+		Is Paid : 	{% ifequal t.invoice.is_paid 1 %}Paid<br />
+					{% else %} Not Paid<br />
+					{% endifequal %}
+		<br />
+		<br />
+		<br />
+	{% endfor %}
 {% endif %}
-{% endfor %}
-<br />
-<br />
-GOTO : 
-<br />
-<br />
-<a href='{% url accounting_invoices %}'>-----> dev invoices</a> <br />
-<a href='{% url manager_dashboard %}'>-----> dev dashboard</a> <br />
-<a href='{% url manager_tdashboard %}'>-----> demo dashboard</a> <br />
-<a href='{% url manager_panel %}'>-----> prout</a> <br/>
-<a href='{% url manager_panel %}'>-----> cacalol</a> <br />
+{% if subscription %}
+	{% for s in subscription %}
+		{% ifnotequal s.time_is_running_out None %}
+			<img src="{{ MEDIA_URL }}/development/dev_warning.png" width="50" height="50">Subscription (id :{{ s.id }}) will expire soon<br />
+			Click Here to Renew your Subscription<br />
+			<form method="post" action=".">
+			    <p><input type="hidden" name="sub_id" value="{{s.id}}"/></p>
+			    <p><input type="submit" value="RENEW" name="renew" /></p>
+			</form>
+			<br />
+			<br />
+		{% endifnotequal %}
+	{% endfor %}
+{% endif %}
+
+
 
 <br />
 {% endblock %}

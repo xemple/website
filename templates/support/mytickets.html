@@ -1,0 +1,9 @@
+{% extends "manager/manager.html" %}
+
+{% block main_content %}
+<a href="{% url new_ticket %}">New <img src="{{ MEDIA_URL }}/development/dev_new_ticket.png" width="40" height="40"> Ticket</a>
+<br /><br /><br /><br />
+{% for t in tickets %}
+<a href="{% url ticket_details t.id %}"><div style="border: thin solid #000000; background-color: #000000; width: 350px;"> &nbsp;Ticket ID :{{ t.id}} &nbsp;&nbsp;&nbsp;&nbsp; Date : {{ t.date|date }} &nbsp;&nbsp;&nbsp;&nbsp; Status : {{ t.status }}</div></a>
+{% endfor %}
+{% endblock %}

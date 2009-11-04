@@ -1,0 +1,14 @@
+{% extends "manager/manager.html" %}
+
+{% block main_content %}
+
+From : {{user.username}}
+<form enctype="multipart/form-data" action="." method="POST">
+	
+{{ ticket_form.as_p }} <br />
+{{ message_form.as_p }} <br />
+
+<input type="submit" value="Post your message" name="post" />
+</form>
+
+{% endblock %}
