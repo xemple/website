@@ -1,0 +1,14 @@
+<div align="center" style="background-color: #d1f0f5; padding:3px;">
+	<br />
+	<br /><br />
+<b>From : {{user.username}}</b><br /><br />
+<form enctype="multipart/form-data" onSubmit="window.close();" action="." method="POST">
+<b>Message</b><br />
+{{ form.content }}<br /><br /><br />
+<b>Linked File</b><br />
+{{ form.linked_file }}<br /><br />
+<input type="submit" value="Post your message" name="post" />
+</form>
+<br />
+<br /><br />
+</div>

@@ -47,6 +47,8 @@ urlpatterns += patterns('apps.support.views',
     url(r'^support/mytickets/$','mytickets', name='mytickets'),
 	url(r'^support/ticket/(?P<ticket_id>\d+)/details/$','ticket_details', name='ticket_details'),
 	url(r'^support/ticket/(?P<ticket_id>\d+)/answer/$','answer_ticket', name='answer_ticket'),
+	url(r'^support/ticket/(?P<ticket_id>\d+)/quick_answer/$','answer_ticket',{'template_name': 'support/ticket_answer_popup.html'}, name='quick_ticket_answer'),
 	url(r'^support/ticket/new/$','new_ticket', name='new_ticket'),
+	
 
 )

@@ -1,0 +1,10 @@
+{% for m in message %}
+<div style="background-color: #d1f0f5; padding:3px;">
+	&nbsp;&nbsp;<b>By {{ m.user.username }} at {{ m.created_at|date:"M d Y G:i:s" }}</b><br/ ><br />
+	<blockquote>&nbsp;{{ m.content|linebreaksbr }}</blockquote>
+</div>
+{% if m.linked_file %}
+<a href="/media/{{ m.linked_file }}"><b>/media/{{ m.linked_file }}</b></a><br />
+{% endif %}
+<br />
+{% endfor %}

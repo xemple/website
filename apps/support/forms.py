@@ -11,4 +11,4 @@ class MessageForm(ModelForm):
 class TicketForm(ModelForm):
 	class Meta:
 		model = Ticket
-		fields = ('type', 'contact_mail', 'contact_phone')
+		fields = ('ticket_type', 'contact_mail', 'contact_phone')

@@ -20,6 +20,7 @@ urlpatterns = patterns('',
 	# /temporary
 	#(r'^billing/', include('apps.billing.urls')),
 	(r'^admin/(.*)', admin.site.root),
+	(r'^xadmin/', include('apps.xemple_admin.urls')),
 	
 )
 

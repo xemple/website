@@ -14,22 +14,34 @@ class TicketManager(models.Manager):
 class Ticket(models.Model):
 	user				=	models.ForeignKey(User, related_name='user_tickets')
 	status				=	models.IntegerField(_('status'),max_length=1, default=0, choices=TICKET_STATUS)
-	type				=	models.IntegerField(_('ticket type'),max_length=1, default=0, choices=TICKET_TYPE)
-	date				=	models.DateTimeField(_('date'))
+	ticket_type			=	models.IntegerField(_('ticket Type'),max_length=1, default=0, choices=TICKET_TYPE)
+	created_at			=	models.DateTimeField(_('date'))
 	contact_mail		=	models.EmailField(_('contact mail'), null=True, blank=True, max_length=100)
 	contact_phone		=	models.CharField(_('contact phone'), null=True, blank=True, max_length=100)
+	answered			=	models.BooleanField(_('is Answered'), default=0)
 	objects				=	TicketManager()
 		
 	class Meta:
 		verbose_name = _('ticket')
 		verbose_name_plural = _('tickets')
+		ordering = ['-created_at']
 		
 	def __unicode__(self):
-		return 'Ticket %s par %s le %s' % (self.id, self.user, self.date)
+		return u'%s' % self.id
 		
 	def save(self, force_insert=False, force_update=False):
-		self.date = datetime.datetime.now()
+		self.created_at = datetime.datetime.now()
 		super(Ticket, self).save()
+		
+	def is_answered(self):
+		self.answered=True
+		self.save()
+		return True
+		
+	def has_new_message(self):
+		self.answered=False
+		self.save()
+		return True
 		
 
 
@@ -38,15 +50,20 @@ class Message(models.Model):
 	ticket				=	models.ForeignKey(Ticket, related_name='ticket_messages')
 	content				=	models.TextField(max_length=1000, blank=True, null=True)
 	linked_file 		=	models.FileField(upload_to='support/user/%s/' % datetime.date.today(), null=True, blank=True) 
-	date 				=	models.DateTimeField(default=datetime.datetime.now())
+	created_at 			=	models.DateTimeField(default=datetime.datetime.now())
 
 	class Meta:
 		verbose_name = _('message')
 		verbose_name_plural = _('messages')
+		ordering = ['-created_at']
 		
 	def __unicode__(self):
-		return 'Ticket %s le %s' % (self.ticket.id, self.date)
+		return 'Ticket %s le %s' % (self.ticket.id, self.created_at)
 		
 	def save(self, force_insert=False, force_update=False):
-		self.date = datetime.datetime.now()
+		if self.user.has_perm('is_staff'):
+			self.ticket.is_answered()
+		else:
+			self.ticket.has_new_message()
+		self.created_at = datetime.datetime.now()
 		super(Message, self).save()
