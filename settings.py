@@ -2,10 +2,6 @@
 import os.path
 PROJECT_PATH = os.path.dirname(os.path.abspath(__file__))
 
-# Django settings for xemple project.
-DEBUG = True
-TEMPLATE_DEBUG = DEBUG
-
 ADMINS = (
 	('.xemple admin', 'admin@xemple.com'),
 )
@@ -63,26 +59,6 @@ TEMPLATE_DIRS = (
 	os.path.join(PROJECT_PATH, 'templates'),
 )
 
-INSTALLED_APPS = (
-	'django.contrib.admin',
-	'django.contrib.auth',
-	'django.contrib.contenttypes',
-	'django.contrib.sessions',
-	'django.contrib.sites',
-	'django.contrib.humanize',
-	'django.contrib.flatpages',
-	'debug_toolbar',
-	'apps.front',
-	'apps.manager',
-	'apps.client',
-	'apps.resources',
-	'apps.service',
-	'apps.billing',
-	'apps.support',
-
-)
-
-
 AUTH_PROFILE_MODULE = "client.ClientProfile"
 LOGIN_URL = "/manager/login/"
 LOGIN_REDIRECT_URL = '/manager/'
@@ -91,3 +67,40 @@ SESSION_EXPIRE_AT_BROWSER_CLOSE = True
 APPEND_SLASH = True
 
 from settings_local import *
+
+if DEBUG == True:
+	INSTALLED_APPS = (
+		'django.contrib.admin',
+		'django.contrib.auth',
+		'django.contrib.contenttypes',
+		'django.contrib.sessions',
+		'django.contrib.sites',
+		'django.contrib.humanize',
+		'django.contrib.flatpages',
+		'debug_toolbar',
+		'apps.front',
+		'apps.manager',
+		'apps.client',
+		'apps.resources',
+		'apps.service',
+		'apps.billing',
+		'apps.support',
+	)
+else:
+	INSTALLED_APPS = (
+		'django.contrib.admin',
+		'django.contrib.auth',
+		'django.contrib.contenttypes',
+		'django.contrib.sessions',
+		'django.contrib.sites',
+		'django.contrib.humanize',
+		'django.contrib.flatpages',
+		'apps.front',
+		'apps.manager',
+		'apps.client',
+		'apps.resources',
+		'apps.service',
+		'apps.billing',
+		'apps.support',
+	)
+
