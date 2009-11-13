@@ -1,16 +1,13 @@
 {% extends "manager/manager.html" %}
 
 {% block main_content %}
-<br />
-<a href="{% url mytickets %}">go back to Ticket Support</a>
-<br />
-<br />
+
 From : {{user.username}}
 <form enctype="multipart/form-data" action="." method="POST">
 	
-{{ form.as_p }}
+{{ form.as_p }} <br />
 
-<input type="submit" value="Post your message" name="post" />
+<input type="submit" value="Submit your knowledge" name="post" />
 </form>
 
 {% endblock %}

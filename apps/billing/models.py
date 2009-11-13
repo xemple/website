@@ -69,7 +69,6 @@ class Subscription(models.Model):
 		return expiracy_delta
 		
 	def send_expiracy_alert(self):
-		print "KAKA"
 		expiracy_delta = self.expiracy_countdown
 		alarm = [relativedelta(days=+15), relativedelta(days=+10), relativedelta(days=+5)]
 		answer = False
@@ -156,7 +155,7 @@ class Invoice(models.Model):
 	def __unicode__(self):
 		return str(self.id)
 	
-	def get_item(self):
+	def get_last_item(self):
 		item = self.invoice_item.latest('id')
 		return item
 		
@@ -164,15 +163,23 @@ class Invoice(models.Model):
 		trans = self.linked_transaction.latest('id')
 		return trans
 		
+	def get_total_without_vat(self):
+		items = self.invoice_item.all()
+		total = 0
+		for i in items:
+			total = total+(i.total())
+		return float(total)
+
 	def get_vat_amount(self):
-		amount_without_vat = self.get_item().total()
-		vat_rate, vat = calculate_vat(amount_without_vat)
-		return round(vat, 2)
+		total = self.get_total_without_vat()
+		vat_rate, vat = calculate_vat(total)
+		return round(float(vat), 2)
 		
 	def get_total_with_vat(self):
-		total_wo_vat = self.get_item().total()
+		total_wo_vat = self.get_total_without_vat()
 		vat = self.get_vat_amount()
-		return round(float(total_wo_vat)+float(vat), 2)
+		total = (float(total_wo_vat)+float(vat))
+		return float(total)
 		
 	def activate_subscriptions(self):
 		subscriptions = self.invoice_item.all()

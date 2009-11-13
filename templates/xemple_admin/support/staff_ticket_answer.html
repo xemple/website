@@ -1,0 +1,58 @@
+{% extends "xemple_admin/xadmin.html" %}
+
+
+{% block main_content %}
+
+
+<div style="border: thin solid #000000; background-color: #fd32d4;">
+	Ticket ID :{{ ticket.id}} &nbsp;&nbsp;&nbsp;&nbsp; 
+	Date : {{ ticket.created_at|date }} &nbsp;&nbsp;&nbsp;&nbsp; 
+	By : {{ ticket.user.username }} ( {{ ticket.user.get_full_name }})&nbsp;&nbsp;&nbsp;&nbsp;
+	Status : {{ ticket.status }}
+</div>
+
+
+<form enctype="multipart/form-data" action="." method="POST">
+	
+	TICKET SETTINGS :
+	<br />
+	<br />
+	{{ ticket_form.ticket_type}}
+	<br />
+	{{ ticket_form.status }}
+	<br />
+	
+
+	
+	
+<br /><br />
+TICKET REPLY :<br />
+<b>From : You</b><br />
+<b>To : {{ ticket.user.username }}</b><br />
+<b>Message</b><br />
+{{ message_form.content }}<br /><br />
+<b>Linked File</b><br />
+{{ message_form.linked_file }}<br /><br />
+<input type="submit" value="Submit or Save Modifications" name="post" />
+</form>
+<br />
+<br /><br />
+{% for m in messages %}
+<div style="border: thin solid #000000; background-color: #00b9da;">
+{{ m.user }}{% if m.user.get_full_name %} ({{ m.user.get_full_name }}) {% endif %} | {{ m.created_at|date }} at {{ m.created_at|date:"G:i:s"}}<br />
+
+{% if m.content %}
+<br />
+Message : {{ m.content|linebreaksbr }}
+<br/>
+<br />
+{% endif %}
+</div>
+{% if m.linked_file %}
+  Linked file : <a href="{{MEDIA_URL}}/{{ m.linked_file }}">{{ m.linked_file }}</a><br />
+{% endif %}
+
+<br />
+{% endfor %}
+
+{% endblock %}

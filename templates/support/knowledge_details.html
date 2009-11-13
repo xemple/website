@@ -1,0 +1,16 @@
+{% extends "manager/manager.html" %}
+
+{% block main_content %}
+
+<br />
+{{ knowledge.title}} &nbsp;&nbsp;&nbsp;&nbsp by {{ knowledge.user.get_full_name }}
+<br />
+<br />
+<br />
+{{ knowledge.content|linebreaksbr }}
+<br />
+<br />
+<br />
+Last modification : {{ knowledge.edited_at|date }} , {{ knowledge.content|wordcount }} words
+
+{% endblock %}

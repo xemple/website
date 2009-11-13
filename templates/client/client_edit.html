@@ -1,0 +1,31 @@
+{% extends "manager/manager.html" %}
+
+{% block main_content %}
+
+<p style="font-size:27px;"><b>Editez vos informations :</b></p><br /><br />
+{% if user_form.errors %}
+Please correct the errors below:
+{% endif %}
+{% if profile_form.errors %}
+Please correct the errors below:
+{% endif %}
+<form action="." method="POST">
+	First name : {{ user_form.first_name }}{% if user_form.first_name.errors %}{{ user_form.first_name.errors|join:", " }}{% endif %}<br />
+	Last name : {{ user_form.last_name }}{% if user_form.last_name.errors %}{{ user_form.last_name.errors|join:", " }}{% endif %}<br />
+	Company (opt) : {{ profile_form.company }}{% if profile_form.company.errors %}{{ profile_form.company.errors|join:", " }}{% endif %}<br />
+	E-mail  : {{ user_form.email }} {% if user_form.email.errors %}{{ user_form.email.errors|join:", " }}{% endif %}<br />
+	Address : {{ profile_form.address }}{% if profile_form.address.errors %}{{ profile_form.address.errors|join:", " }}{% endif %}<br />
+	Address (opt) : {{ profile_form.address_ext }}{% if profile_form.address_ext.errors %}{{ profile_form.address_ext.errors|join:", " }}{% endif %}<br />
+	City  : {{ profile_form.city }}{% if profile_form.city.errors %}{{ profile_form.city.errors|join:", " }}{% endif %}<br />
+	Zip Code  : {{ profile_form.zip_code }}{% if profile_form.zip_code.errors %}{{ profile_form.zip_code.errors|join:", " }}{% endif %}<br />
+	Country  : {{ profile_form.country }}{% if profile_form.country.errors %}{{ profile_form.country.errors|join:", " }}{% endif %}<br />
+	Phone  : {{ profile_form.phone }}{% if profile_form.phone.errors %}{{ profile_form.phone.errors|join:", " }}{% endif %}<br />
+	Fax (opt)  : {{ profile_form.fax }}{% if profile_form.fax.errors %}{{ profile_form.fax.errors|join:", " }}{% endif %}<br />
+	Cellphone (opt) : {{ profile_form.cellphone }}{% if profile_form.cellphone.errors %}{{ profile_form.cellphone.errors|join:", " }}{% endif %}<br />
+<br />
+<br />
+<input type="submit" value="Submit" name="edit_infos" />
+</form>
+
+
+{% endblock %}

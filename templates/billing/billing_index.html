@@ -44,9 +44,10 @@ Expiracy : {{ s.expiracy|date:'N j, Y' }}<br />
 
 __________________________________________________________________________
 <br /><br /><br />
+{% if invoices %}
 Last invoices<br /><br /><br />
 {% for i in invoices %}
-<a href="{% url accounting_invoice_details i.id %}">
+<a href="{% url invoice_details i.id %}">
 <b>{{ i.date|date:'N j, Y' }}<br />
 Amount: {{ i.get_total_with_vat }} €<br />
 Status :	{% ifequal i.is_paid 1 %}Paid<br />
@@ -55,7 +56,7 @@ Status :	{% ifequal i.is_paid 1 %}Paid<br />
 </a>
 <br /><br /><br />
 {% endfor %}
-
+{% endif %}
 
 
 {% endblock %}

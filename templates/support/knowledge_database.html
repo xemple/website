@@ -1,0 +1,19 @@
+{% extends "manager/manager.html" %}
+
+{% block main_content %}
+<a href="{% url knowledge_contribution %}">> Contribute to the knowledge DB !</a>
+<br />
+<br />
+<br />
+<br />
+<br />
+<br />
+{% if knowledges %}
+{% for k in knowledges %}
+<a href="{% url knowledge_details k.id %}">. {{ k.title }}</a><br />
+{% endfor %}
+{% else %}
+No Knowledge for the moment :(
+{% endif %}
+
+{% endblock %}

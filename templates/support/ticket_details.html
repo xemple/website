@@ -1,7 +1,10 @@
 {% extends "manager/manager.html" %}
 
 {% block main_content %}
-
+<br />
+<a href="{% url mytickets %}">go back to Ticket Support</a>
+<br />
+<br />
 <div style="border: thin solid #000000; background-color: #fd32d4;">Ticket ID :{{ ticket.id}} &nbsp;&nbsp;&nbsp;&nbsp; Date : {{ ticket.created_at|date }} &nbsp;&nbsp;&nbsp;&nbsp; Status : {{ ticket.status }}</div>
 <br /><br />
 <a href="{% url answer_ticket ticket.id %}">New<img src="{{ MEDIA_URL }}/development/dev_answer.png" width="40" height="40">Answer</a>
@@ -9,7 +12,7 @@
 <br /><br /><br /><br />
 {% for m in messages %}
 <div style="border: thin solid #000000; background-color: #00b9da;">
-{{ m.user }} | {{ m.created_at|date }} at {{ m.created_at|date:"G:i:s"}}<br />
+{% if m.user.first_name %}{{ m.user.first_name }}{% else %}{{ m.user.username }}{% endif %} | {{ m.created_at|date }} at {{ m.created_at|date:"G:i:s"}}<br />
 <br />
 Message : {{ m.content|linebreaksbr }}<br/>
 <br /></div>

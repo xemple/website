@@ -10,3 +10,12 @@ TICKET_TYPE = [
 				(1, 'Billing Issue'),
 				(2, 'Report an Issue to Xemple')
 				]
+		
+				
+KNOW_TYPE =		[
+				('technical', 'Technical'),
+				('billing', 'Billing'),
+				('server', 'Server'),
+				('os', 'OS'),
+				('misc', 'Miscellaneous'),
+				]

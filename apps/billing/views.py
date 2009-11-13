@@ -13,7 +13,15 @@ from django.shortcuts import render_to_response
 from apps.billing.models import Offer, MiniCart, Invoice, Subscription, InvoiceItem, Transaction
 from apps.resources.tools import calculate_billing
 from apps.billing.forms import VerifyInvoiceCheck
-
+from django.http import HttpResponse
+from django.template import loader, Context
+#PDF TEST ADD
+from django import http
+from django.template.loader import get_template
+from django.template import Context
+import ho.pisa as pisa
+import cStringIO as StringIO
+import cgi
 
 
 
@@ -35,7 +43,7 @@ def select_offer(request):
 	return render_to_response('billing/select_offer.html', {'offer_list':offers}, context_instance=RequestContext(request))
 	
 #2	
-@login_required	
+@login_required 
 def select_details(request, offer_id):
 	offer = Offer.objects.get(id=int(offer_id))
 	return render_to_response('billing/select_details.html', {'offer':offer}, context_instance=RequestContext(request))
@@ -52,7 +60,7 @@ def verify_invoice(request):
 	selection = request.session['mycart']
 	offer = Offer.objects.get(id=int(selection.item_id))
 	quantity = selection.quantity
-	offer_price, quantity, total_wot, vat_rate, vat, total_ti =  calculate_billing(user, offer, quantity)
+	offer_price, quantity, total_wot, vat_rate, vat, total_ti =	 calculate_billing(user, offer, quantity)
 	if request.method == 'POST':
 		form = VerifyInvoiceCheck(request.POST)
 		if form.is_valid():
@@ -69,11 +77,11 @@ def verify_invoice(request):
 																context_instance=RequestContext(request))
 
 
-#          .
-#         / \
-#       /  |  \
-#     /    |    \		WORK IN PROGRESS
-#   /      o      \   
+#		   .
+#		  / \
+#		/  |  \
+#	  /	   |	\		WORK IN PROGRESS
+#	/	   o	  \	  
 # /_________________\		
 							
 @login_required
@@ -94,11 +102,11 @@ def renew_duration_choice(request):
 	form = VerifyInvoiceCheck()
 	return render_to_response('billing/renew_subscription.html', {'subscription':sub}, context_instance=RequestContext(request))
 	
-#          .
-#         / \
-#       /  |  \
-#     /    |    \		WORK IN PROGRESS
-#   /      o      \   
+#		   .
+#		  / \
+#		/  |  \
+#	  /	   |	\		WORK IN PROGRESS
+#	/	   o	  \	  
 # /_________________\	
 									
 
@@ -126,10 +134,10 @@ def temporary_bank_return_validator(request, trans_num, status):
 	transaction = Transaction.objects.get(id=trans_num)
 	if status == u'ok':
 		transaction.validate()
-	#MESSAGE POUR LA BANQUE : 	reply_to_bank = "well received"
+	#MESSAGE POUR LA BANQUE :	reply_to_bank = "well received"
 	elif status == u'error':
 		transaction.cancel()
-	#MESSAGE POUR LA BANQUE : 	reply_to_bank = "well received"
+	#MESSAGE POUR LA BANQUE :	reply_to_bank = "well received"
 	else :
 		print 'SOMETHING IS GOING WRONG =[[[[['
 	return HttpResponse("Bank return received")
@@ -143,3 +151,24 @@ def create_minicart_item(request, item_id, quantity):
 	if request.POST:
 		redirect_url = request.POST.get('back', redirect_url)
 	return HttpResponseRedirect(redirect_url)
+
+@login_required
+def myinvoices(request):
+	invoices = Invoice.objects.filter(user=request.user)
+	return render_to_response('billing/myinvoices.html', {'invoices':invoices}, context_instance=RequestContext(request))
+
+@login_required
+def invoice_details(request, invoice_id, filename=None, prompt=False):
+	invoice = Invoice.objects.get(id=invoice_id)
+	template_dict='billing/invoice_details.html'
+	context_dict={'invoice':invoice}
+	if request.method == 'POST':
+		template = get_template(template_dict)
+		context = Context(context_dict)
+		html  = template.render(context)
+		result = StringIO.StringIO()
+		pdf = pisa.CreatePDF(StringIO.StringIO(html.encode("UTF-8")), result)
+		if not pdf.err:
+			return http.HttpResponse(result.getvalue(), mimetype='application/pdf')
+		return http.HttpResponse('We had some errors<pre>%s</pre>' % cgi.escape(html))
+	return render_to_response(template_dict, context_dict, context_instance=RequestContext(request))

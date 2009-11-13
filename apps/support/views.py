@@ -10,13 +10,45 @@ from django.contrib.auth.decorators import login_required
 from django.contrib.auth import authenticate, login
 from django.contrib.auth.models import User
 from django.shortcuts import render_to_response
-from apps.support.models import Ticket, Message
-from apps.support.forms import MessageForm, TicketForm
+from apps.support.models import Ticket, Message, Knowledge
+from apps.support.forms import MessageForm, TicketForm, NewKnowledgeForm
+
+@login_required
+def support_index(request):
+	return render_to_response('support/support.html', {}, context_instance=RequestContext(request))
+	
+@login_required
+def knowledge_db(request):
+	knowledges = Knowledge.objects.filter(is_active=True)
+	return render_to_response('support/knowledge_database.html', {'knowledges':knowledges}, context_instance=RequestContext(request))
+	
+@login_required
+def knowledge_details(request, know_id):
+	knowledge = Knowledge.objects.get(id=know_id)
+	return render_to_response('support/knowledge_details.html', {'knowledge':knowledge}, context_instance=RequestContext(request))
+	
+@login_required
+def knowledge_contribution(request):
+	knowledge = Knowledge()
+	if request.method == 'POST':
+		form = NewKnowledgeForm(request.POST, instance = knowledge)
+		if form.is_valid():
+			new_knowledge = form.save(commit=False)
+			new_knowledge.user = request.user
+			new_knowledge.save()
+			return HttpResponseRedirect(reverse('knowledge_contribution_thanks'))
+	form = NewKnowledgeForm(instance=knowledge)
+	return render_to_response('support/knowledge_contribution.html', {'form':form}, context_instance=RequestContext(request))
+	
+@login_required
+def knowledge_contribution_thanks(request):
+	return render_to_response('support/knowledge_contribution_thanks.html', {}, context_instance=RequestContext(request))	
 
 @login_required
 def mytickets(request):
-	tickets = Ticket.objects.filter(user = request.user).order_by('-created_at')
-	return render_to_response('support/mytickets.html', {'tickets':tickets}, context_instance=RequestContext(request))
+	awaiting_answer_tickets = Ticket.objects.filter(user = request.user, answered=0).exclude(status=2).order_by('-created_at')
+	answered_tickets = Ticket.objects.filter(user = request.user, status=0 or 1, answered=1).exclude(status=2).order_by('-created_at')
+	return render_to_response('support/mytickets.html', {'awaiting_answer_tickets':awaiting_answer_tickets, 'answered_tickets':answered_tickets}, context_instance=RequestContext(request))
 	
 	
 @login_required

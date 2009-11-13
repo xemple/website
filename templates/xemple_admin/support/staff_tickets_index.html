@@ -1,0 +1,30 @@
+{% extends "xemple_admin/xadmin.html" %}
+
+{% block main_content %}
+
+{% if new_tickets %}
+AWAITING ANSWER :
+<br />
+<br />
+{% for t in new_tickets %}
+<a href="{% url staff_ticket_answer t.id %}">From {{ t.user.username }} ( {{ t.user.get_full_name }} ) | {{ t.created_at|date }} at {{ t.created_at|date:"G:i:s"}}</a><br />
+{% endfor %}
+<br />
+<br />
+<br />
+<br />
+{% endif %}
+{% if pending_tickets %}
+PENDING TICKETS :
+<br />
+<br />
+{% for t in pending_tickets %}
+<a href="{% url staff_ticket_answer t.id %}">From {{ t.user.username }} ( {{ t.user.get_full_name }} ) | {{ t.created_at|date }} at {{ t.created_at|date:"G:i:s"}}</a><br />
+{% endfor %}
+<br />
+<br />
+<br />
+<br />
+{% endif %}
+
+{% endblock %}

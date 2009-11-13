@@ -1,0 +1,12 @@
+{% extends "manager/manager.html" %}
+
+{% block main_content %}
+
+<div style="border: thin solid #000000; background-color: #fd32d4;">Ticket ID :{{ ticket.id}} &nbsp;&nbsp;&nbsp;&nbsp; Date : {{ ticket.created_at|date }} &nbsp;&nbsp;&nbsp;&nbsp; Status : {{ ticket.status }}</div>
+<br /><br />
+<a href="/">New<img src="{{ MEDIA_URL }}/development/dev_answer.png" width="40" height="40">Answer</a>
+<br />
+<br /><br /><br /><br />
+LOLOLOLOL
+
+{% endblock %}

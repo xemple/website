@@ -6,7 +6,11 @@ from django.utils.translation import ugettext as _
 
 urlpatterns = patterns('apps.xemple_admin.views',
 	url(r'^$', 'index', name='xadmin_index'),
-	url(r'^staff/', 'staff_index', name='xadmin_staff_index'),
+	url(r'^staff/$', 'staff_index', name='xadmin_staff_index'),
+	url(r'^staff/tickets/$', 'staff_tickets_index', name='staff_tickets_index'),
+	url(r'^staff/tickets/(?P<ticket_id>\d+)/answer/$','staff_ticket_answer', name='staff_ticket_answer'),
+	
+	
 )
 
 

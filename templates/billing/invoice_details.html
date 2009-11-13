@@ -7,6 +7,8 @@ Bonjour {{ user.get_full_name }} !  -- -- -- --<a href='{% url manager_logout %}
 <br />
 <br />
 <br />
+<form action="." method="post" enctype="multipart/form-data">
+<input type="submit" value="Convert HTML to PDF" />
 First name : <b>{{ invoice.first_name }} </b><br />
 Last Name : <b>{{ invoice.last_name }}</b><br />
 E-mail : <b>{{ invoice.email }}</b><br />
@@ -29,10 +31,11 @@ Cellphone : <b>{{ invoice.cellphone}}</b><br />
 {% endif %}
 <br />
 Invoice ID : <b>{{ invoice.id }}</b><br />
-Product : <b>{{ invoice.get_item.subscription }}</b> <br />
-Without VAT : <b>{{ invoice.get_item.total }} euros</b><br />
-VAT Amount : <b>{{ invoice.get_vat_amount }} euros</b><br />
-Total w. VAT : <b>{{ invoice.get_total_with_vat }} euros</b><br />
+Products : <br /><b>{% for i in invoice.invoice_item.all %}<i>Item : {{ i.subscription }} | Duration : {{ i.quantity }} months | Price/Month : {{ i.price }} € without VAT</i><br />{% endfor %}</b> <br />
+Without VAT : <b>{{ invoice.get_total_without_vat }} €</b><br />
+VAT Amount : <b>{{ invoice.get_vat_amount }} €</b><br />
+Total w. VAT : <b>{{ invoice.get_total_with_vat }} €</b><br />
 <br /><br /><br />
+</form>
 
 {% endblock %}

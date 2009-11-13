@@ -1,44 +1,5 @@
-<!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Transitional//EN"
-	"http://www.w3.org/TR/xhtml1/DTD/xhtml1-transitional.dtd">
+{% extends "xemple_admin/xadmin.html" %}
 
-<html xmlns="http://www.w3.org/1999/xhtml" xml:lang="en" lang="en">
-<head>
-	<meta http-equiv="Content-Type" content="text/html; charset=utf-8"/>
-
-	<title>Xemple | Coming soon</title>
-	
-	<style>
-
-html, body {
-	background-color:#171616;
-	margin: 0;
-	padding: 0;
-	height: 100%;
-	color: white;
-}
-
-
-#footer {
-	position: absolute;
-	bottom: 0; left: 0;
-	width: 100%;
-	background-color:#00b0e3;
-	height:5px;
-}
-</style>
-
-
-</head>
-
-<body>
-
-prout
-
-	<div id="footer">	
-	
-	</div>
-	
-</div>
-
-</body>
-</html>
+{% block main_content %}
+Salut {{ user }}
+{% endblock %}

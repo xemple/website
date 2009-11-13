@@ -39,3 +39,33 @@ class NewClientForm(forms.ModelForm):
 													cellphone	=	self.cleaned_data['cellphone'],
 													)
 		return new_client
+		
+		
+		
+		
+		
+class UserForm(forms.ModelForm):
+	first_name = forms.CharField(max_length=200, help_text="Use puns liberally")
+	last_name = forms.CharField(max_length=200, help_text="Use puns liberally")
+	email = forms.EmailField()
+	class Meta:
+		model = User
+		fields = ('first_name', 'last_name', 'email')
+		
+	def clean_email(self):
+		if self.cleaned_data['email'] == self.instance.email:
+			return self.cleaned_data['email']
+		try:
+			user = User.objects.get(email__exact=self.cleaned_data['email'])
+		except User.DoesNotExist:
+			return self.cleaned_data['email']
+		raise forms.ValidationError('This email address is already in use. Please supply a different email address.')
+		
+		
+class ProfileForm(forms.ModelForm):
+	
+	class Meta:
+		model=ClientProfile
+		exclude = ('user',)
+
+

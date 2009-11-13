@@ -11,7 +11,6 @@ from django.contrib.auth.decorators import login_required
 from django.shortcuts import render_to_response, get_object_or_404
 from django.contrib.contenttypes.models import ContentType
 from apps.billing.models import Subscription, Transaction, Invoice, MiniCart
-from apps.resources.tools import render_to_pdf
 
 
 
@@ -49,12 +48,3 @@ def manager_tadmin(request):
 def manager_tpanel(request):
 	return render_to_response('manager/panel.html', {}, context_instance=RequestContext(request))
 	
-@login_required
-def accounting_invoices(request):
-	invoices = Invoice.objects.filter(user=request.user)
-	return render_to_response('manager/accounting_invoices.html', {'invoices':invoices}, context_instance=RequestContext(request))
-	
-@login_required
-def accounting_invoice_details(request, invoice_id):
-	invoice = Invoice.objects.get(id=invoice_id)
-	return render_to_response('manager/accounting_invoice_details.html', {'invoice':invoice}, context_instance=RequestContext(request))

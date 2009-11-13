@@ -1,5 +1,5 @@
 from django.contrib import admin
-from apps.support.models import  Ticket, Message
+from apps.support.models import  Ticket, Message, Knowledge
 
 
 
@@ -20,3 +20,12 @@ class MessageAdmin(admin.ModelAdmin):
 
 	
 admin.site.register(Message, MessageAdmin)
+
+
+
+class KnowledgeAdmin(admin.ModelAdmin):
+	list_display = ('id', 'title', 'edited_at', 'is_active')
+	list_display_links = ('title',)
+
+	
+admin.site.register(Knowledge, KnowledgeAdmin)

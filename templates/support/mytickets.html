@@ -2,14 +2,35 @@
 
 {% block main_content %}
 
-<a href="{% url new_ticket %}">New <img src="{{ MEDIA_URL }}/development/dev_new_ticket.png" width="40" height="40"> Ticket</a>
+<a href="{% url new_ticket %}"><img src="{{ MEDIA_URL }}/development/dev_new_ticket.png" width="40" height="40"> Nouveau Ticket</a>
 <br /><br /><br /><br />
 
-{% for t in tickets %}
+
+
+
+{% if awaiting_answer_tickets %}
+VOUS ATTENDEZ UNE REPONSE POUR LE(S) TICKET(S) SUIVANT(S) :<br /><br />
+{% for t in awaiting_answer_tickets %}
 <a href="{% url ticket_details t.id %}">
 	<div style="border: thin solid #000000; background-color: #000000; width: 350px;"> 
 		&nbsp;Ticket ID :{{ t.id }} &nbsp;&nbsp;&nbsp;&nbsp; Date : {{ t.created_at|date }} &nbsp;&nbsp;&nbsp;&nbsp; Status : {{ t.status }}
 	</div>
 </a>
 {% endfor %}
+{% endif %}
+
+<br /><br /><br /><br />
+
+{% if answered_tickets %}
+LE STAFF DE XEMPLE A REPONDU AUX TICKETS SUIVANTS:<br /><br />
+{% for t in answered_tickets %}
+<a href="{% url ticket_details t.id %}">
+	<div style="border: thin solid #000000; background-color: #000000; width: 350px;"> 
+		&nbsp;Ticket ID :{{ t.id }} &nbsp;&nbsp;&nbsp;&nbsp; Date : {{ t.created_at|date }} &nbsp;&nbsp;&nbsp;&nbsp; Status : {{ t.status }}
+	</div>
+</a>
+{% endfor %}
+{% endif %}
+
+
 {% endblock %}
