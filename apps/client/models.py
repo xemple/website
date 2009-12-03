@@ -26,16 +26,21 @@ class ClientProfileManager(models.Manager):
 
 
 class ClientProfile(models.Model):
-	user				=	models.ForeignKey(User, unique=True)
-	company				=	models.CharField(_('company'),max_length=100, null=True, blank=True)
-	address				=	models.CharField(_('address'),max_length=100)
-	address_ext			=	models.CharField(_('address'),max_length=100, null=True, blank=True)
-	zip_code			=	models.CharField(_('zip code'),max_length=100)
-	city				=	models.CharField(_('city'),max_length=100)
-	country				=	models.CharField(_('country'),max_length=2, choices=COUNTRY_CHOICES)
-	phone				=	models.CharField(_('phone'),max_length=50)
-	fax					=	models.CharField(_('fax'),max_length=50, null=True, blank=True)
-	cellphone			=	models.CharField(_('cellphone'),max_length=50, null=True, blank=True)
+	user						=	models.ForeignKey(User, unique=True)
+	company						=	models.CharField(_('company'),max_length=100, null=True, blank=True)
+	address						=	models.CharField(_('address'),max_length=100)
+	address_ext					=	models.CharField(_('address'),max_length=100, null=True, blank=True)
+	zip_code					=	models.CharField(_('zip code'),max_length=100)
+	city						=	models.CharField(_('city'),max_length=100)
+	country						=	models.CharField(_('country'),max_length=2, choices=COUNTRY_CHOICES)
+	phone						=	models.CharField(_('phone'),max_length=50)
+	fax							=	models.CharField(_('fax'),max_length=50, null=True, blank=True)
+	cellphone					=	models.CharField(_('cellphone'),max_length=50, null=True, blank=True)
+	mail_expiracy_alerts 		=	models.BooleanField(_('receive expiracy alerts'), default=True)
+	expiracy_countdown			=	models.IntegerField(_('expiracy mail start'), max_length=3, default=15, null=True, blank=True)
+	mail_newsletter				=	models.BooleanField(_('receive newletter'), default=False)
+	mail_ticket_answer 			=	models.BooleanField(_('mail ticket answer'), default=True)
+	pouete 						=	models.TextField(_('note'),max_length=2000, null=True, blank=True)
 	objects				=	ClientProfileManager()
 		
 	class Meta:
@@ -48,7 +53,7 @@ class ClientProfile(models.Model):
 
 """
 mail_expiracy_alerts 		=	models.BooleanField(_('receive expiracy alerts'), default=True)
-expiracy_mail_start			=	models.CharField(_('expiracy mail start'), max_length=2)
-receive_newletter			=	models.BooleanField(_('receive newletter'), default=False)
+expiracy_countdown			=	models.IntegerField(_('expiracy mail start'), max_length=2)
+mail_newsletter				=	models.BooleanField(_('receive newletter'), default=False)
 mail_ticket_answer 			=	models.BooleanField(_('mail ticket answer'), default=True)
 """

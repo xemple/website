@@ -25,7 +25,6 @@ def manager_panel(request):
 		invoice_item =  t.invoice.get_item()	
 	subscription = Subscription.objects.filter(user = user)
 	if request.method == 'POST':
-		print 'kaka'
 		if request.POST.has_key('renew'):
 			print 'boudin'
 			sub_to_renew = request.POST['sub_id']

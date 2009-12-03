@@ -85,6 +85,8 @@ if DEBUG == True:
 		'apps.service',
 		'apps.billing',
 		'apps.support',
+		'apps.emailing',
+		'south'
 	)
 else:
 	INSTALLED_APPS = (
@@ -102,5 +104,6 @@ else:
 		'apps.service',
 		'apps.billing',
 		'apps.support',
+		'apps.emailing',
 	)
 

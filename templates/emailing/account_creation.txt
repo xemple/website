@@ -1,0 +1,16 @@
+
+Chèr(e) {{ user.get_full_name }}
+
+Votre compte vient d'être créé et activé. Vous bénéficiez dès maintenant de votre compte Xemple.com, qui vous permettra de gérer vos offres et différents service depuis votre interface d'administration, ainsi que depuis votre téléphone portable, si vous avez installé iXemple
+
+
+Vos informations de connexion :
+
+Nom d'utilisateur : {{ user.username }}
+Mot de passe : {{ password }}
+
+
+Pour toute question sur l'utilisation de votre compte, connectez-vous sur votre manager et consultez la base de données du support client.
+
+
+Bienvenue chez Xemple.com !

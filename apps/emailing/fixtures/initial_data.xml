@@ -1,0 +1,31 @@
+<?xml version="1.0" encoding="utf-8"?>
+<django-objects version="1.0">
+	
+    <object pk="1" model="emailing.xmailtemplate">
+        <field type="CharField" name="mail_type">new_user</field>
+        <field type="CharField" name="subject">Xemple : Votre compte a bien été créé.</field>
+        <field type="CharField" name="template">emailing/account_creation.txt</field>
+    </object>
+    <object pk="2" model="emailing.xmailtemplate">
+        <field type="CharField" name="mail_type">password_change</field>
+        <field type="CharField" name="subject">Xemple : Votre mot de passe a bien été changé.</field>
+        <field type="CharField" name="template">emailing/account_creation.txt</field>
+    </object>
+    <object pk="3" model="emailing.xmailtemplate">
+        <field type="CharField" name="mail_type">password_lost</field>
+        <field type="CharField" name="subject">Xemple : Votre nouveau mot de passe.</field>
+        <field type="CharField" name="template">emailing/account_creation.txt</field>
+    </object>
+    <object pk="4" model="emailing.xmailtemplate">
+        <field type="CharField" name="mail_type">service_gonna_expire</field>
+        <field type="CharField" name="subject">Xemple : Un de vos services va expirer.</field>
+        <field type="CharField" name="template">emailing/account_creation.txt</field>
+    </object>
+    <object pk="5" model="emailing.xmailtemplate">
+        <field type="CharField" name="mail_type">service_expired</field>
+        <field type="CharField" name="subject">Xemple : Un des vos services a expiré.</field>
+        <field type="CharField" name="template">emailing/account_creation.txt</field>
+    </object>
+
+
+</django-objects>
