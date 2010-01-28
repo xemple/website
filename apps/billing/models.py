@@ -1,11 +1,18 @@
-from django.db import models
-from django.utils.translation import ugettext_lazy as _
-from django.contrib.auth.models import User
-from apps.service.models import Service
-from apps.resources.tools import calculate_billing, calculate_vat
 import datetime
+from django.db import models
 from dateutil.relativedelta import *
 from django.core.mail import send_mail
+from django.contrib.auth.models import User
+from django.utils.datastructures import SortedDict
+from django.utils.translation import ugettext_lazy as _
+
+from apps.service.models import Service
+from apps.resources.tools import calculate_billing, calculate_vat, invoice_number_generator
+
+
+
+
+
 
 
 class MiniCart(object):
@@ -58,7 +65,7 @@ class Subscription(models.Model):
 		return str("%s / %s") % (self.user, self.offer)
 		
 	def has_service(self):
-		answer = False
+		answer = None
 		if self.service is not None:
 			answer = True
 		return answer
@@ -119,12 +126,10 @@ class Subscription(models.Model):
 
 class InvoiceManager(models.Manager):
 	def generate_invoice(self, user, vat_rate):
-		new_invoice = self.model(None,int(99), int(user.id), user.first_name, user.last_name, \
+		new_invoice = self.model(None,invoice_number_generator(), int(user.id), user.first_name, user.last_name, \
 								user.get_profile().address, user.get_profile().address_ext, user.get_profile().city, \
 								user.get_profile().zip_code, user.get_profile().country, user.email, user.get_profile().phone, \
 								user.get_profile().fax, user.get_profile().cellphone, datetime.datetime.today(), vat_rate )
-		new_invoice.save()
-		new_invoice.invoice_num = int(new_invoice.id)
 		new_invoice.save()
 		return new_invoice
 		
@@ -263,3 +268,80 @@ class Transaction(models.Model):
 		self.save()
 		return True
 		
+		
+		
+__all__ = ['MyCart']
+
+class CartItem(object):
+	def __init__(self, item_id, name, quantity, price, renew_sub = None):
+		self.item_id = item_id
+		self.name = name
+		self.quantity = quantity
+		self.price = price
+		self.renew_sub = renew_sub
+
+
+
+class MyCart(object):
+	def __init__(self):
+		self._items = SortedDict()
+
+	def get_item(self, item_id):
+		return self._items.get(item_id, None)
+
+	def add_item(self, item_id, renew=False):
+		print "OMG"
+		if renew == False :
+			item = Offer.objects.get(id__exact=item_id)
+			price = item.price
+			name = item.name
+		else:
+			item = Subscription.objects.get(id__exact=item_id)
+			price = item.offer.price
+			name = item.offer.name
+		print "zzzzz"
+		test = self.get_item(item_id)
+		print "xxxxx"
+		print test
+		if test is None:
+			print "LOOOLLLLLL"
+			item = CartItem(
+				item_id = str(item.id),
+				name = str(name),
+				quantity = int(1),
+				price = float(price),
+			)
+		self._items[item_id] = item
+		return item
+
+	def update_item(self, item_id, count):
+		item = self.get_item(item_id)
+		if item is not None:
+			item.set_count(count)
+			if count <= 0:
+				del self._items[item_id]
+			else:
+				self._items[item_id] = item
+		elif count > 0:
+			item = self.add_item(item_id)
+			if count > 1:
+				item.inc_count(count-1)
+			self._items[item_id] = item
+		return item
+
+	def remove_item(self, item_id):
+		item = self.get_item(item_id)
+		if item is not None:
+			item.inc_count(-1)
+			if item.units <= 0:
+				del self._items[item_id]
+			else:
+				self._items[item_id] = item
+		return item
+
+
+	def items(self):
+		return self._items.values()
+
+	def empty(self):
+		self._items = {}

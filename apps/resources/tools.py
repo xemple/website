@@ -10,6 +10,7 @@ import cStringIO as StringIO
 import cgi
 #TEST
 from apps.support.models import Ticket
+import datetime
 
 
 
@@ -107,3 +108,11 @@ def pdf_test(request):
 	source	= Ticket.objects.get(id=1)
 	template = 'support/test_pdf.html'
 	render_to_pdf(template, source)
+
+	
+def invoice_number_generator():
+	from apps.billing.models import Invoice
+	todayinv = Invoice.objects.filter(date=datetime.date.today)
+	invnum = int(str(datetime.date.today()).replace('-','')[:6] + str(10000+todayinv.count())[1:])+1
+	print invnum
+	return int(invnum)

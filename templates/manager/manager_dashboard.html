@@ -2,56 +2,145 @@
 
 {% block main_content %}
 
-<img src="{{ MEDIA_URL }}/development/dev_dashboard.png" width="100" height="100">
-<br />
-<br />
-<div align="center">
-{% if my_subs %}
-Your Services 
-<br /><br />
-{% else %}
-Vous ne disposez pas encore de services chez nous. <a href="{% url select_offer %}">Cliquez-ici pour souscrire a une de nos offres.</a>
-{% endif %}
-<br />
 
+<div id="manager_left">
 
+	<div class="title cblack">
+		<img src="{{ MEDIA_URL }}/manager/img/title_panneaudecontrole.png"><br><br>		
+		Le dashboard est le résumé de tous vos services Xemple.<br><br>
+	</div>
 
-{% for sub in my_subs %}
+	{% for sub in my_subs %}
+	<div class="dashboard_item">
+		<div class="dashboard_item_header">&nbsp;</div>
+		<div class="dashboard_item_content">
 
+			<div class="dashboard_item_topcontent">
+				<div class="dashboard_item_expand dashboard_item_1" data="1" style="display: none;"><img src="{{ MEDIA_URL }}/manager/img/icon_collapse.png"></div>
+				<div class="dashboard_item_expand dashboard_item_1" data="1"><img src="{{ MEDIA_URL }}/manager/img/icon_expand.png"></div>
+				<div class="dashboard_item_status">
+					{% if sub.has_service %}
+					<img src="{{ MEDIA_URL }}/manager/img/status_online.png">
+					{% else %}
+					<img src="{{ MEDIA_URL }}/manager/img/status_suspended.png">
+					{% endif %}
+				</div>		
+				
+				<div class="dashboard_item_name cdarkblue"><b><span class="clightblue">X</span>VPS</b><br>{{ sub.service_name}}</div>	
+				
 
+					<div class="dashboard_smallmeter_name cgrey dashboard_smallmeters_1">BP:</div>
+					<div class="dashboard_smallmeter dashboard_smallmeters_1">
+						<div class="dashboard_smallmeter_color dashboard_smallmeter_green" style="width: 40px;"></div>
+					</div>
+	
+					<div class="dashboard_smallmeter_name cgrey dashboard_smallmeters_1">HD:</div>
+					<div class="dashboard_smallmeter dashboard_smallmeters_1">
+						<div class="dashboard_smallmeter_color dashboard_smallmeter_red" style="width: 100px;"></div>
+					</div>
 
+			</div>
+			
+			
+			<div id="dashboard_bottomcontent_1" class="dashboard_item_bottomcontent" style="display: none;">
+			
+				<div class="dashboard_element cgrey">
+					<span class="dashboard_element_title cdarkblue">domaines</span><br><br>
+					- nglayer.com<br>
+					- nglayer.net<br>
+					- zombinazi.net<br>
+				</div>
+				
+				<div class="dashboard_element cgrey">
+					<span class="dashboard_element_title cdarkblue">bande passante</span><br>
+					usage mensuel
+					
+					<div class="dashboard_bigmeter">
+						<div class="dashboard_bigmeter_color dashboard_bigmeter_green" style="width: 40px;"></div>
+					</div>
+	
+	
+					<div class="dashboard_bigmeter_data">740 <span class="dashboard_bigmeter_unit">Go</span></div>
+					<div class="dashboard_bigmeter_outof">/ 3300 Go</div>
+					
+					<div class="dashboard_element_more cgrey">VOIR DETAILS</div>					
+				</div>
 
-{% ifnotequal sub.has_problem None %} 
-<div style="border: thin solid #000000; background-color: #ff1515; width: 400px;">
-	<img src="{{ MEDIA_URL }}/development/dev_warning.png" width="20" height="20"> {{ sub.has_problem }} <img src="{{ MEDIA_URL }}/development/dev_warning.png" width="20" height="20">
+				<div class="dashboard_element cgrey">
+					<span class="dashboard_element_title cdarkblue">espace disque</span><br>
+					usage global
+					
+					<div class="dashboard_bigmeter">
+						<div class="dashboard_bigmeter_color dashboard_bigmeter_orange" style="width: 100px;"></div>
+					</div>
+	
+	
+					<div class="dashboard_bigmeter_data">8.8 <span class="dashboard_bigmeter_unit">Go</span></div>
+					<div class="dashboard_bigmeter_outof">/ 10 Go</div>
+					
+					<div class="dashboard_element_more cgrey">VOIR DETAILS</div>					
+				</div>	
+				
+				
+				<div class="dashboard_element dashboard_element_startstop cgrey">
+					<span class="dashboard_element_title cdarkblue">actions</span><br><br>
+					
+					START STOP ?
+				
+				</div>
+			
+			</div>
+			
+			
+		</div>
+		<div class="dashboard_item_footer">&nbsp;</div>
+	</div>
+
+	{% endfor %}
+
+			
 </div>
-{% else %}
-<div style="border: thin solid #000000; background-color: #2aff00; width: 400px;">
-Service is running perfectly
+
+<script language="javascript">
+
+	$(".panel_item").mouseover(function(){
+		$(this).css('background-color', '#e4eaee');
+		$(this).css('border', '1px solid #a3becc');
+		
+	}).mouseout(function(){
+		$(this).css('background-color', '#f7f8f8');
+		$(this).css('border', '1px solid #f7f8f8');		
+	});
+
+	$(".dashboard_item_expand").click(function() { 
+	
+		var oid;
+		oid = $(this).attr('data');
+		
+		$(".dashboard_item_" + oid).toggle();
+		
+		if ($("#dashboard_bottomcontent_" + oid).css('display') == 'none') {
+			$("#dashboard_bottomcontent_" + oid).slideDown(300);
+			$(".dashboard_smallmeters_" + oid).fadeOut(300);			
+		} else {
+			$("#dashboard_bottomcontent_" + oid).slideUp(300);
+			$(".dashboard_smallmeters_" + oid).fadeIn(300);			
+		}
+		
+		
+	});
+</script>
+
+
+<div id="manager_right">
+	SALUT ANDREW
+
+
 </div>
-{% endifnotequal %}
 
 
 
 
 
 
-<div style="border: thin solid #000000; background-color: #00b9da; width: 400px;">
-<img src="{{ MEDIA_URL }}/development/dev_service.png" width="50" height="50">Server name : {{ sub.service_name }}<br />
-{% ifnotequal sub.time_is_running_out None %}
-<div style="background-color: #fc9400; width: 400;">
-<img src="{{ MEDIA_URL }}/development/dev_warning.png" width="20" height="20">
-{% endifnotequal %} 
-Expire le {{ sub.expiracy|date:"d/m/Y" }}
-{% ifnotequal sub.time_is_running_out None %}
-<img src="{{ MEDIA_URL }}/development/dev_warning.png" width="20" height="20">
-</div>
-{% endifnotequal %}
-<br />
-</div>
-
-<br />
-<br />
-{% endfor %}
-</div>
 {% endblock %}

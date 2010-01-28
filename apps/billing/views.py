@@ -150,7 +150,15 @@ def create_minicart_item(request, item_id, quantity):
 	request.session['mycart'] = MiniCart(item_id=int(item_id), quantity=int(quantity))
 	if request.POST:
 		redirect_url = request.POST.get('back', redirect_url)
+		cart = request.cart
+		cart.add_item(item_id)
+		print cart.items
+		cart = request.cart
+		cart.empty
 	return HttpResponseRedirect(redirect_url)
+	
+def add_to_mycart(request, item_id):
+	pass
 
 @login_required
 def myinvoices(request):
@@ -160,15 +168,18 @@ def myinvoices(request):
 @login_required
 def invoice_details(request, invoice_id, filename=None, prompt=False):
 	invoice = Invoice.objects.get(id=invoice_id)
-	template_dict='billing/invoice_details.html'
+	template_dict='billing/pdfinvoice.html'
 	context_dict={'invoice':invoice}
 	if request.method == 'POST':
 		template = get_template(template_dict)
 		context = Context(context_dict)
 		html  = template.render(context)
 		result = StringIO.StringIO()
-		pdf = pisa.CreatePDF(StringIO.StringIO(html.encode("UTF-8")), result)
+		pdf = pisa.CreatePDF(StringIO.StringIO(html.encode("ISO-8859-1")), result)
 		if not pdf.err:
 			return http.HttpResponse(result.getvalue(), mimetype='application/pdf')
 		return http.HttpResponse('We had some errors<pre>%s</pre>' % cgi.escape(html))
-	return render_to_response(template_dict, context_dict, context_instance=RequestContext(request))
+	return render_to_response('billing/invoice_details.html', context_dict, context_instance=RequestContext(request))
+	
+	
+	

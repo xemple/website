@@ -1,0 +1,121 @@
+
+
+body {
+	font-family: Helvetica, Arial, sans-serif;
+}
+
+#header {
+}
+
+#invoice_logo {
+	font-size: 6em;
+	font-family: Arial, Helvetica;
+	color: #777;
+	float: left;
+	display: block;
+}
+#invoice {
+	font-size: 6em;
+	font-family: Arial, Helvetica;
+	color: #777;
+	float: left;
+	text-align: center;
+	display: block;
+}
+
+#date {
+	float: right;
+	margin-top: 1.5em;
+	text-align: right;
+	display: block;
+}
+
+/* Addresses */
+
+#addresses {
+	clear: both;
+}
+
+#from_business {
+	display: block;
+	float: left;
+	margin-top: 0.5em;
+	width: 200px;
+}
+
+#to_business {
+	width: 17em;
+	display: block;
+	float: left;
+	text-align: left;
+	margin-top: 0.5em;
+	width: 200px;
+}
+
+#to {
+	float: left;
+	display: block;
+}
+
+.contact {
+	margin-top: 0.5em;
+}
+
+/* main invoice section */
+
+#main {
+	padding-top: 2em;
+	clear: both;
+}
+
+/* tabulation */
+
+#tabulation
+{
+	width: 100%;
+}
+
+#tabulation th, #tabulation td {
+	text-align: right;
+	padding: 4px;
+}
+
+#tabulation .billable_item td {
+	font-family: Monaco, sans-serif;
+}
+
+#tabulation .first {
+	text-align: left;
+}
+
+#tabulation .totalLabel {
+	padding-right: 20px;
+}
+
+.totals {
+	border: 1px solid #000;
+}
+
+.billable_item td {
+	background-color: #EEE;
+}
+
+/* Footer */
+
+#footer {
+	bottom: 0px;
+	font-family: Garamond, "Times New Roman", serif;
+	display: block;
+	margin: 0 auto;
+}
+
+#company {
+	display: block;
+	float: left;
+}
+
+#thanks {
+	display: block;
+	float: right;
+	vertical-align: bottom;
+}

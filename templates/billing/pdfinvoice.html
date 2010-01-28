@@ -1,0 +1,75 @@
+<img src="media/front/img/header.jpg">
+<br />
+<br />
+<br />
+<html>
+<head>
+	<title>Xemple Invoice</title>
+	<link rel="stylesheet" href="media/development/pdfinvoice.css" type="text/css">
+</head>
+<body>
+	<div id="header">
+		<div id="invoice_logo">
+			<img src="media/development/XEMPLE.png" width="200px">
+		</div>
+		<div id="invoice">
+			Facture
+		</div>
+		<div id="date">
+			Date: {{ invoice.date|date:"d/m/Y" }} <br />
+			Facture : {{ invoice.invoice_num }}
+		</div>
+	</div>
+	
+	<div id="addresses">
+		
+		<div id="to_business">
+			<img src="media/manager/img/x.png" width="12px"> &nbsp; <b>Client :</b>
+			<div id="to">
+				<div>
+					{{ invoice.first_name }} {{ invoice.last_name }}<br />
+					{{ invoice.address }}<br />
+					{% if invoice.address_ext %}
+					{{ invoice.address_ext }}<br />
+					{% endif %}
+					{{ invoice.zip_code }} {{ invoice.city }} ( {{ invoice.country }} )<br />
+
+				</div>
+				<br />
+				<img src="media/manager/img/x.png" width="12px"> &nbsp; <b>Contact :</b>
+				<div class="contact">
+					{{ invoice.phone }}<br />
+					{{ invoice.email}}
+				</div>
+			</div>
+
+
+		</div>
+	</div>
+	
+	<div id="main">
+		<table id="tabulation">
+			<tr> <th class="first">Service</th> <th>Durée en mois</th> <th>Prix HT / Mois</th> <th>Total</th> </tr>
+			{% for i in invoice.invoice_item.all %}
+			<tr class="billable_item"> <td class="first">{{ i.subscription }}</td> <td>{{ i.quantity }}</td> <td>{{ i.price }}</td> <td>{{ i.total}}</td> </tr>
+			{% endfor %}
+			<br />
+			<br />
+			<tr id="total"><td colspan="2">&nbsp;</td><td class="totalLabel">Total HT</td><td class="totals">{{ invoice.get_total_without_vat }}</td></tr>
+			<tr id="paid"><td colspan="2">&nbsp;</td><td class="totalLabel">TVA</td><td class="totals">{{ invoice.get_vat_amount }}</td></tr>
+			<tr id="due"><td colspan="2">&nbsp;</td><td class="totalLabel">Total TTC</td><td class="totals">{{ invoice.get_total_with_vat }}</td></tr>
+		</table>
+	</div>
+	
+	<div id="footer">
+		<div id="company">
+			Xemple SARL
+		</div>
+		<div id="thanks">
+			Merci pour votre confiance !
+		</div>
+	</div>
+	
+</body>
+</html>
+

@@ -1,41 +1,81 @@
 {% extends "manager/manager.html" %}
 
 {% block main_content %}
-Bonjour {{ user.get_full_name }} !  -- -- -- --<a href='{% url manager_logout %}'>[LOGOUT]</a><br />
-<p style="font-size:10px;"> [ {{ user.email }} ]</p>
+
 <br />
 <br />
-<br />
-<br />
+<div align=right>
 <form action="." method="post" enctype="multipart/form-data">
-<input type="submit" value="Convert HTML to PDF" />
-First name : <b>{{ invoice.first_name }} </b><br />
-Last Name : <b>{{ invoice.last_name }}</b><br />
-E-mail : <b>{{ invoice.email }}</b><br />
+<input  type="submit" value="Get in PDF" />
+</div>
+<br />
+
+
+
+<img src="{{ MEDIA_URL }}/manager/img/x.png" width="9px">Client :<br />
 {% if invoice.company %}
-Company : <b>{{ invoice.company}}</b><br />
+	<b>{{ invoice.company}}</b><br />
 {% endif %}
-Address : <b>{{ invoice.address }}</b><br />
+
+	<b>{{ invoice.first_name }} {{ invoice.last_name }}</b><br />
+	<b>{{ invoice.address }}</b><br />
+	
 {% if invoice.address_ext %}
-Address : <b>{{ invoice.address_ext}}</b><br />
+	<b>{{ invoice.address_ext}}</b><br />
 {% endif %}
-City : <b>{{ invoice.city }}</b><br />
-Zip Code : <b>{{ invoice.zip_code }}</b><br />
-Country : <b>{{ invoice.country }}</b><br />
-Phone : <b>{{ invoice.phone }}</b><br />
+
+	<b>{{ invoice.zip_code }} {{ invoice.city }} ({{ invoice.country }})</b><br />
+<br />
+<img src="{{ MEDIA_URL }}/manager/img/x.png" width="9px">Contact :<br />	
+e. <b>{{ invoice.email }}</b><br />
+t. <b>{{ invoice.phone }}</b><br />
 {% if invoice.fax %}
-Fax : <b>{{ invoice.fax}}</b><br />
+f. <b>{{ invoice.fax}}</b><br />
 {% endif %}
 {% if invoice.cellphone %}
-Cellphone : <b>{{ invoice.cellphone}}</b><br />
+p. <b>{{ invoice.cellphone}}</b><br />
 {% endif %}
+
 <br />
-Invoice ID : <b>{{ invoice.id }}</b><br />
-Products : <br /><b>{% for i in invoice.invoice_item.all %}<i>Item : {{ i.subscription }} | Duration : {{ i.quantity }} months | Price/Month : {{ i.price }} € without VAT</i><br />{% endfor %}</b> <br />
-Without VAT : <b>{{ invoice.get_total_without_vat }} €</b><br />
-VAT Amount : <b>{{ invoice.get_vat_amount }} €</b><br />
-Total w. VAT : <b>{{ invoice.get_total_with_vat }} €</b><br />
-<br /><br /><br />
+<div id="main">
+	<table id="tabulation">
+		<tr> 	
+			<th class="first">Service</th> 
+			<th>Durée</th> 
+			<th>Prix HT / Mois</th> 
+			<th>Total HT</th> </tr>
+				
+		{% for i in invoice.invoice_item.all %}
+			<tr class="billable_item"> 
+				<td class="first">{{ i.subscription }}</td> 
+				<td>{{ i.quantity }} mois</td> 
+				<td>{{ i.price }} €</td> 
+				<td>{{ i.total}} €</td> 
+			</tr>
+		{% endfor %}
+		<br />
+		<br />
+		<br />
+			<tr id="total">
+				<td colspan="2">&nbsp;</td>
+				<td class="totalLabel">Total HT</td>
+				<td class="totals">{{ invoice.get_total_without_vat }} €</td>
+			</tr>
+			
+			<tr id="paid">
+				<td colspan="2">&nbsp;</td>
+				<td class="totalLabel">TVA (19,6 %)</td>
+				<td class="totals">{{ invoice.get_vat_amount }} €</td>
+			</tr>
+			
+			<tr id="due">
+				<td colspan="2">&nbsp;</td>
+				<td class="totalLabel">Total TTC</td>
+				<td class="totals">{{ invoice.get_total_with_vat }} €</td>
+			</tr>
+	</table>
+</div>
+
 </form>
 
 {% endblock %}

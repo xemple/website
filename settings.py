@@ -47,6 +47,7 @@ MIDDLEWARE_CLASSES = (
 	'django.middleware.doc.XViewMiddleware',
 	'django.contrib.flatpages.middleware.FlatpageFallbackMiddleware',
 	'debug_toolbar.middleware.DebugToolbarMiddleware',
+	'apps.billing.middleware.CartMiddleware',
 )
 
 AUTHENTICATION_BACKENDS = (

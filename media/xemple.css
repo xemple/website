@@ -88,3 +88,37 @@ a:hover {
 .cdarkblue {
 	color: #376076;
 }
+
+
+
+/* tabulation */
+
+#tabulation
+{
+	width: 100%;
+}
+
+#tabulation th, #tabulation td {
+	text-align: right;
+	padding: 4px;
+}
+
+#tabulation .billable_item td {
+	font-family: Monaco, sans-serif;
+}
+
+#tabulation .first {
+	text-align: left;
+}
+
+#tabulation .totalLabel {
+	padding-right: 20px;
+}
+
+.totals {
+	border: 1px solid #000;
+}
+
+.billable_item td {
+	background-color: #EEE;
+}
